@@ -1,10 +1,5 @@
+import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
 import Project from '@/lib/domain/models/project'
-
-interface ProjectInterface {
-  id: number
-  name: string
-  desc: string
-}
 
 class ProjectService {
   noOfProjs: number

@@ -1,4 +1,6 @@
-class Project {
+import type { ProjectInterface } from '../interfaces/projectInterface'
+
+class Project implements ProjectInterface {
   id: number
   name: string
   desc: string
