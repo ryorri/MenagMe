@@ -2,8 +2,9 @@ import type PriorityEnum from '../enums/priority'
 import type StateEnum from '../enums/state'
 import type Project from './project'
 import type User from './user'
+import type { StoryInterface } from '../interfaces/storyInterface'
 
-class Story {
+class Story implements StoryInterface {
   id: number
   name: string
   desc: string

@@ -3,7 +3,7 @@ import type StateEnum from '../enums/state'
 import type Project from '../models/project'
 import type User from '../models/user'
 
-export interface Story {
+export interface StoryInterface {
   id: number
   name: string
   desc: string

@@ -1,4 +1,6 @@
-class User {
+import type { UserInterface } from '../interfaces/userInterface'
+
+class User implements UserInterface {
   id: number
   name: string
   surname: string

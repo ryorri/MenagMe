@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import HomeView from '@/lib/presentation/views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,27 +13,27 @@ const router = createRouter({
     {
       path: '/project/details/:id',
       name: 'ProjectDetals',
-      component: () => import('@/views/ProjectViews/ProjectDetails.vue'),
+      component: () => import('@/lib/presentation/views/ProjectViews/ProjectDetails.vue'),
     },
     {
       path: '/project/edit/:id',
       name: 'ProjectEdit',
-      component: () => import('@/views/ProjectViews/ProjectEdit.vue'),
+      component: () => import('@/lib/presentation/views/ProjectViews/ProjectEdit.vue'),
     },
     {
       path: '/project/delete/:id',
       name: 'ProjectDelete',
-      component: () => import('@/views/ProjectViews/ProjectDelete.vue'),
+      component: () => import('@/lib/presentation/views/ProjectViews/ProjectDelete.vue'),
     },
     {
       path: '/project/create',
       name: 'ProjectCreate',
-      component: () => import('@/views/ProjectViews/ProjectCreate.vue'),
+      component: () => import('@/lib/presentation/views/ProjectViews/ProjectCreate.vue'),
     },
     {
       path: '/project/list',
       name: 'ProjectList',
-      component: () => import('@/views/ProjectViews/ProjectList.vue'),
+      component: () => import('@/lib/presentation/views/ProjectViews/ProjectList.vue'),
     },
     ////////Stories/////////////////////////////////////////////////////////////////
   ],
