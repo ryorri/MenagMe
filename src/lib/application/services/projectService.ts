@@ -23,7 +23,6 @@ class ProjectService {
         result.push(proj)
       }
     }
-
     return result
   }
 

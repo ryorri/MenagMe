@@ -1,14 +1,15 @@
+import type { UserInterface } from '@/lib/domain/interfaces/userInterface'
 import User from '../../domain/models/user'
 
 class UserService {
   constructor() {}
 
-  GetCurrentUser(): string | null {
+  GetCurrentUser(): UserInterface | null {
     const userRaw = localStorage.getItem('currentUser')
 
     if (userRaw) {
       const user = JSON.parse(userRaw)
-      return `${user.name} ${user.surname}`
+      return user
     } else return null
   }
   Create(id: number, name: string, sur: string) {

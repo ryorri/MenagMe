@@ -37,27 +37,27 @@ const router = createRouter({
     },
     ////////Stories/////////////////////////////////////////////////////////////////
     {
-      path: '/story/details/:id',
-      name: 'StorytDetals',
+      path: '/story/details/:projectId/:storyId',
+      name: 'StoryDetails',
       component: () => import('@/lib/presentation/views/StoryViews/StoryDetails.vue'),
     },
     {
-      path: '/story/edit/:id',
+      path: '/story/edit/:projectId/:storyId',
       name: 'StoryEdit',
       component: () => import('@/lib/presentation/views/StoryViews/StoryEdit.vue'),
     },
     {
-      path: '/story/delete/:id',
+      path: '/story/delete/:projectId/:storyId',
       name: 'StoryDelete',
       component: () => import('@/lib/presentation/views/StoryViews/StoryDelete.vue'),
     },
     {
-      path: '/story/create',
+      path: '/story/create/:projectId',
       name: 'StoryCreate',
       component: () => import('@/lib/presentation/views/StoryViews/StoryCreate.vue'),
     },
     {
-      path: '/story/list/:id',
+      path: '/story/list/:projectId',
       name: 'StoryList',
       component: () => import('@/lib/presentation/views/StoryViews/StoryList.vue'),
     },

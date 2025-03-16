@@ -1,17 +1,14 @@
 <template>
   <mainLayout>
     <div class="project-details">
-      <h2 class="project-name">{{ project?.name }}</h2>
-      <p class="project-description">{{ project?.desc }}</p>
-
       <form @submit.prevent="editProject" class="form-container">
         <div class="form-group">
-          <label for="name">Nazwa:</label>
+          <label for="name">Name:</label>
           <input id="name" v-model="editedProject.name" type="text" required class="form-input" />
         </div>
 
         <div class="form-group">
-          <label for="desc">Opis:</label>
+          <label for="desc">Description:</label>
           <textarea id="desc" v-model="editedProject.desc" required class="form-input"></textarea>
         </div>
 
@@ -23,7 +20,7 @@
 
 <script setup lang="ts">
 import ProjectService from '@/lib/application/services/projectService'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import mainLayout from '../../layouts/mainLayout.vue'
 
@@ -37,6 +34,15 @@ const projectService = new ProjectService()
 const project = projectService.Details(projectId)
 
 const editedProject = ref({ name: '', desc: '' })
+
+onMounted(() => {
+  if (project) {
+    editedProject.value = {
+      name: project.name,
+      desc: project.desc,
+    }
+  }
+})
 
 const editProject = () => {
   projectService.Edit(projectId, editedProject.value.name, editedProject.value.desc)

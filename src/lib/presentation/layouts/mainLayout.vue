@@ -6,7 +6,7 @@
     >
       <!--Login-->
       <div v-if="user" class="user-box d-flex align-items-center">
-        <span>{{ user }}</span>
+        <span>{{ user?.name }} {{ user?.surname }}</span>
         <button class="btn btn-outline-light btn-sm log-out-btn">Log out</button>
       </div>
 
@@ -93,7 +93,7 @@ const user = userService.GetCurrentUser()
 const projectList = ref<ProjectInterface[]>([])
 const listInterval = ref()
 const selectedProjectInterval = ref()
-const selectedProject = ref<ProjectInterface | null>(null)
+const selectedProject = ref()
 
 onMounted(() => {
   fetchProjectList()
@@ -126,11 +126,13 @@ const selectProject = (event: Event) => {
   if (target.value != 'null') {
     selectedProjectId.value = target.value
 
-    projectService.SetSelectProject(Number(selectedProjectId.value)) // Zapisywanie wybranego projektu
+    projectService.SetSelectProject(Number(selectedProjectId.value))
   } else {
     selectedProjectId.value = null
-    projectService.SetSelectProject(selectedProjectId.value) // Zapisywanie wybranego projektu
+    projectService.SetSelectProject(selectedProjectId.value)
   }
+
+  router.push({ name: 'home' })
 }
 
 const goToProjects = () => {
@@ -139,7 +141,7 @@ const goToProjects = () => {
 
 const goToStories = () => {
   if (selectedProject.value) {
-    router.push({ name: 'StoryList', params: { id: selectedProject.value.id } })
+    router.push({ name: 'StoryList', params: { projectId: selectedProject.value.id } })
   } else {
     router.push({ name: 'NoProject' })
   }

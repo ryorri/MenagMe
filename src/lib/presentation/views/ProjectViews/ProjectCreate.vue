@@ -1,7 +1,6 @@
 <template>
   <mainLayout>
     <form @submit.prevent="createProject" class="form-container">
-      <!-- Nazwa -->
       <div class="form-group">
         <label for="name">Name:</label>
         <input
@@ -14,7 +13,6 @@
         />
       </div>
 
-      <!-- Opis -->
       <div class="form-group">
         <label for="desc">Description:</label>
         <textarea
@@ -26,7 +24,6 @@
         ></textarea>
       </div>
 
-      <!-- Przycisk do utworzenia projektu -->
       <button type="submit" class="btn btn-success">Create project</button>
     </form>
   </mainLayout>

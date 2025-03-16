@@ -74,13 +74,7 @@ const goToEditProject = (projId: number) => {
 }
 
 const fetchProjectList = () => {
-  for (let i = 0; i < noOfProjs.value; i++) {
-    const projData = localStorage.getItem('proj' + i)
-    if (projData) {
-      const project = JSON.parse(projData) as ProjectInterface
-      projectList.value.push(project)
-    }
-  }
+  projectList.value = projectService.GetProjectsList()
 }
 </script>
 
