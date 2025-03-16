@@ -9,6 +9,18 @@
         <span>{{ user }}</span>
         <button class="btn btn-outline-light btn-sm log-out-btn">Log out</button>
       </div>
+
+      <!--Select project-->
+      <div class="user-box d-flex align-items-center">
+        Select project
+        <select @change="selectProject">
+          <option selected v-if="selectedProject">{{ selectedProject.name }}</option>
+          <option :value="'null'"></option>
+          <option v-for="project in projectList" :key="project.id" :value="project.id">
+            {{ project.name }}
+          </option>
+        </select>
+      </div>
       <h2 class="m-0 text-center flex-grow-1">MenagMe</h2>
     </header>
 
@@ -17,7 +29,10 @@
       <nav class="bg-light border-end p-3 sidebar">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <router-link to="/project/list" class="nav-link text-success">📂 Projects</router-link>
+            <button @click="goToProjects" class="nav-link text-success">📂 Projects</button>
+          </li>
+          <li class="nav-item">
+            <button @click="goToStories" class="nav-link text-success">📂 Stories</button>
           </li>
         </ul>
       </nav>
@@ -63,9 +78,70 @@
 </style>
 
 <script setup lang="ts">
+import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
+
+import ProjectService from '@/lib/application/services/projectService'
 import UserService from '@/lib/application/services/userService'
-import { onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const userService = new UserService()
+const projectService = new ProjectService()
 const user = userService.GetCurrentUser()
+const projectList = ref<ProjectInterface[]>([])
+const listInterval = ref()
+const selectedProjectInterval = ref()
+const selectedProject = ref<ProjectInterface | null>(null)
+
+onMounted(() => {
+  fetchProjectList()
+  fetchSelectedProject()
+  listInterval.value = setInterval(fetchProjectList, 30000)
+  selectedProjectInterval.value = setInterval(fetchSelectedProject, 30000)
+})
+
+onUnmounted(() => {
+  if (listInterval.value) {
+    clearInterval(listInterval.value)
+  }
+  if (selectedProjectInterval.value) {
+    clearInterval(selectedProjectInterval.value)
+  }
+})
+
+const fetchSelectedProject = () => {
+  selectedProject.value = projectService.GetSelectProject()
+}
+
+const fetchProjectList = () => {
+  projectList.value = projectService.GetProjectsList()
+}
+
+const selectProject = (event: Event) => {
+  const target = event.target as HTMLSelectElement
+  const selectedProjectId = ref()
+
+  if (target.value != 'null') {
+    selectedProjectId.value = target.value
+
+    projectService.SetSelectProject(Number(selectedProjectId.value)) // Zapisywanie wybranego projektu
+  } else {
+    selectedProjectId.value = null
+    projectService.SetSelectProject(selectedProjectId.value) // Zapisywanie wybranego projektu
+  }
+}
+
+const goToProjects = () => {
+  router.push({ name: 'ProjectList' })
+}
+
+const goToStories = () => {
+  if (selectedProject.value) {
+    router.push({ name: 'StoryList', params: { id: selectedProject.value.id } })
+  } else {
+    router.push({ name: 'NoProject' })
+  }
+}
 </script>

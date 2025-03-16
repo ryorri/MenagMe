@@ -26,6 +26,24 @@ class ProjectService {
 
     return result
   }
+
+  SetSelectProject(id: number | null): void {
+    const raw = localStorage.getItem('proj' + id)
+
+    if (id == null) {
+      localStorage.removeItem('selectedProject')
+    } else if (id != null && raw != null) {
+      localStorage.setItem('selectedProject', raw)
+    }
+  }
+
+  GetSelectProject(): ProjectInterface | null {
+    const raw = localStorage.getItem('selectedProject')
+    if (raw) {
+      return JSON.parse(raw) as ProjectInterface
+    } else return null
+  }
+
   Create(name: string, desc: string): void {
     const proj = new Project(this.noOfProjs, name, desc)
 

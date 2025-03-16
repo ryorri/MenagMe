@@ -40,16 +40,12 @@
 </template>
 
 <script setup lang="ts">
+import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
+
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import ProjectService from '@/lib/application/services/projectService'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
-
-interface ProjectInterface {
-  id: number
-  name: string
-  desc: string
-}
 
 const router = useRouter()
 const projectList = ref<ProjectInterface[]>([])
