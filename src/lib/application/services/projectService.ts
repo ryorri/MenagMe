@@ -16,7 +16,7 @@ class ProjectService {
   GetProjectsList(): ProjectInterface[] {
     const result: ProjectInterface[] = []
 
-    for (let i = 1; i < this.noOfProjs; i++) {
+    for (let i = 0; i < this.noOfProjs; i++) {
       const projRaw = localStorage.getItem('proj' + i)
       if (projRaw) {
         const proj = JSON.parse(projRaw) as ProjectInterface

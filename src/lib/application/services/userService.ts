@@ -1,5 +1,6 @@
 import type { UserInterface } from '@/lib/domain/interfaces/userInterface'
 import User from '../../domain/models/user'
+import type RolesEnum from '@/lib/domain/enums/roles'
 
 class UserService {
   constructor() {}
@@ -12,10 +13,17 @@ class UserService {
       return user
     } else return null
   }
-  Create(id: number, name: string, sur: string) {
-    const user = new User(id, name, sur)
+  Create(id: number, name: string, sur: string, role: RolesEnum) {
+    const user = new User(id, name, sur, role)
 
-    localStorage.setItem('currentUser', JSON.stringify(user))
+    localStorage.setItem(name + sur, JSON.stringify(user))
+  }
+  Login(name: string, sur: string) {
+    const user = localStorage.getItem(name + sur)
+
+    if (user) {
+      localStorage.setItem('currentUser', user)
+    }
   }
 }
 export default UserService

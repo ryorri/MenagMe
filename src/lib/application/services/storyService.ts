@@ -21,7 +21,7 @@ class StoryService {
   GetStoriesList(projectId: number): StoryInterface[] {
     const result: StoryInterface[] = []
 
-    for (let i = 1; i < this.noOfStories; i++) {
+    for (let i = 0; i < this.noOfStories; i++) {
       const projRaw = localStorage.getItem(`story${i}_${projectId}`)
       if (projRaw) {
         const proj = JSON.parse(projRaw) as StoryInterface
