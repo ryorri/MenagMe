@@ -1,13 +1,13 @@
 <template>
   <mainLayout>
-    <div class="story-details">
-      <h2 class="story-name">{{ story?.name }}</h2>
-      <p class="story-description">{{ story?.desc }}</p>
+    <div class="project-details">
+      <h2 class="project-name">{{ task?.name }}</h2>
+      <p class="project-description">{{ task?.desc }}</p>
 
       <div class="confirmation-box">
         <h3>Are you sure?</h3>
         <strong>
-          <button @click="deleteStory(storyId)" class="delete-btn">Delete!</button>
+          <button @click="deleteTask(taskId)" class="delete-btn">Delete!</button>
         </strong>
       </div>
     </div>
@@ -15,28 +15,28 @@
 </template>
 
 <script setup lang="ts">
-import StoryService from '@/lib/application/services/storyService'
 import { useRoute, useRouter } from 'vue-router'
 import mainLayout from '../../layouts/mainLayout.vue'
+import TaskService from '@/lib/application/services/taskService'
 
 const route = useRoute()
 const router = useRouter()
 
 const storyId = Number(route.params.storyId)
-const projectId = Number(route.params.projectId)
+const taskId = Number(route.params.taskId)
 
-const storyService = new StoryService()
+const taskService = new TaskService()
 
-const story = storyService.Details(storyId, projectId)
+const task = taskService.Details(taskId, storyId)
 
-const deleteStory = (id: number) => {
-  storyService.Delete(id, projectId)
+const deleteTask = (id: number) => {
+  taskService.Delete(id, storyId)
   router.push({ name: 'StoryList' })
 }
 </script>
 
 <style scoped>
-.story-details {
+.project-details {
   max-width: 800px;
   margin: 50px auto;
   padding: 20px;
@@ -46,14 +46,14 @@ const deleteStory = (id: number) => {
   text-align: center;
 }
 
-.story-name {
+.project-name {
   font-size: 2rem;
   font-weight: 700;
   color: #2c3e50;
   margin-bottom: 15px;
 }
 
-.story-description {
+.project-description {
   font-size: 1.1rem;
   color: #7f8c8d;
   margin-bottom: 30px;

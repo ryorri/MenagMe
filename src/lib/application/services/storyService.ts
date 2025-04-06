@@ -2,7 +2,6 @@ import type { StoryInterface } from '@/lib/domain/interfaces/storyInterface'
 import PriorityEnum from '@/lib/domain/enums/priority'
 import StateEnum from '@/lib/domain/enums/state'
 import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
-
 import Story from '@/lib/domain/models/story'
 import User from '@/lib/domain/models/user'
 
@@ -14,15 +13,22 @@ class StoryService {
     this.noOfStories = storedNoOfStories ? parseInt(storedNoOfStories, 10) : 0
   }
 
-  GetNoOfProjs(): number {
+  GetNoOfStories(): number {
     return this.noOfStories
+  }
+
+  GetStory(id: number, projId: number): StoryInterface | null {
+    const storyRaw = localStorage.getItem(`story${id}_proj${projId}`)
+    if (storyRaw) {
+      return JSON.parse(storyRaw)
+    } else return null
   }
 
   GetStoriesList(projectId: number): StoryInterface[] {
     const result: StoryInterface[] = []
 
     for (let i = 0; i < this.noOfStories; i++) {
-      const projRaw = localStorage.getItem(`story${i}_${projectId}`)
+      const projRaw = localStorage.getItem(`story${i}_proj${projectId}`)
       if (projRaw) {
         const proj = JSON.parse(projRaw) as StoryInterface
 
@@ -42,15 +48,15 @@ class StoryService {
   ): void {
     const story = new Story(this.noOfStories, name, desc, prio, project, new Date(), state, user)
 
-    localStorage.setItem(`story${this.noOfStories}_${project.id}`, JSON.stringify(story))
+    localStorage.setItem(`story${this.noOfStories}_proj${project.id}`, JSON.stringify(story))
 
     this.noOfStories += 1
 
     localStorage.setItem('noOfStories', this.noOfStories.toString())
   }
 
-  Details(id: number, project: ProjectInterface): StoryInterface | null {
-    const projRaw = localStorage.getItem(`story${id}_${project.id}`)
+  Details(id: number, projectId: number): StoryInterface | null {
+    const projRaw = localStorage.getItem(`story${id}_proj${projectId}`)
 
     if (projRaw) {
       const proj = JSON.parse(projRaw) as StoryInterface
@@ -66,17 +72,17 @@ class StoryService {
     desc: string,
     prio: PriorityEnum,
     project: ProjectInterface,
-    date: Date,
+    createdAt: Date,
     state: StateEnum,
     user: User,
   ): void {
-    const proj = new Story(id, name, desc, prio, project, date, state, user)
+    const story = new Story(id, name, desc, prio, project, createdAt, state, user)
 
-    localStorage.setItem(`story${id}_${project.id}`, JSON.stringify(proj))
+    localStorage.setItem(`story${id}_proj${project.id}`, JSON.stringify(story))
   }
 
-  Delete(id: number, project: ProjectInterface): void {
-    localStorage.removeItem(`story${id}_${project.id}`)
+  Delete(id: number, projectId: number): void {
+    localStorage.removeItem(`story${id}_proj${projectId}`)
   }
 }
 

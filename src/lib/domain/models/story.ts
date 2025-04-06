@@ -10,7 +10,7 @@ class Story implements StoryInterface {
   desc: string
   prio: PriorityEnum
   project: Project
-  creationDate: Date
+  createdAt: Date
   state: StateEnum
   user: User
 
@@ -20,7 +20,7 @@ class Story implements StoryInterface {
     desc: string,
     prio: PriorityEnum,
     project: Project,
-    date: Date,
+    createdAt: Date,
     state: StateEnum,
     user: User,
   ) {
@@ -29,7 +29,7 @@ class Story implements StoryInterface {
     this.desc = desc
     this.prio = prio
     this.project = project
-    this.creationDate = date
+    this.createdAt = createdAt
     this.state = state
     this.user = user
   }

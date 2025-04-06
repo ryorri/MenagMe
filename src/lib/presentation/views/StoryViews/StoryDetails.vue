@@ -7,7 +7,7 @@
       <div class="story-info">
         <p><strong>Priority:</strong> {{ story?.prio }}</p>
         <p><strong>State:</strong> {{ story?.state }}</p>
-        <p><strong>Created At:</strong> {{ story?.creationDate }}</p>
+        <p><strong>Created At:</strong> {{ formatDate(story?.createdAt) }}</p>
         <p><strong>Project:</strong> {{ story?.project.name }}</p>
         <p><strong>Author:</strong> {{ story?.user.name }}</p>
       </div>
@@ -16,21 +16,18 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import StoryService from '@/lib/application/services/storyService'
-import ProjectService from '@/lib/application/services/projectService'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
+import { formatDate } from '@/lib/application/extensions/dateFormatter'
 
 const route = useRoute()
-const router = useRouter()
 const storyService = new StoryService()
-const projectService = new ProjectService()
 
 const storyId = Number(route.params.storyId)
 const projectId = Number(route.params.projectId)
 
-const project = projectService.Details(projectId)
-const story = storyService.Details(storyId, project!)
+const story = storyService.Details(storyId, projectId)
 </script>
 
 <style scoped>

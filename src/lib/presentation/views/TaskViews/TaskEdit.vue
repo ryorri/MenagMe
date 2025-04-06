@@ -1,36 +1,41 @@
 <template>
   <mainLayout>
     <div class="form-container">
-      <form @submit.prevent="editStory">
+      <form @submit.prevent="editTask">
         <div class="form-group">
           <label for="name">Name</label>
-          <input id="name" v-model="storyData.name" type="text" class="form-control" required />
+          <input id="name" v-model="taskData.name" type="text" class="form-control" required />
         </div>
 
         <div class="form-group">
           <label for="desc">Description</label>
-          <textarea id="desc" v-model="storyData.desc" class="form-control" required></textarea>
+          <textarea id="desc" v-model="taskData.desc" class="form-control" required></textarea>
         </div>
 
         <div class="form-group">
           <label for="prio">Priority</label>
-          <select id="prio" v-model="storyData.prio" class="form-control" required>
-            <option v-for="(label, key) in PriorityEnum" :key="key" :value="key">
-              {{ label }}
+          <select v-model="taskData.prio" id="prio" class="form-control">
+            <option v-for="priority in priorities" :key="priority" :value="priority">
+              {{ priority }}
             </option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="state">State</label>
-          <select id="state" v-model="storyData.state" class="form-control" required>
-            <option v-for="(label, key) in StateEnum" :key="key" :value="key">
-              {{ label }}
+          <select v-model="taskData.state" id="state" class="form-control">
+            <option v-for="state in states" :key="state" :value="state">
+              {{ state }}
             </option>
           </select>
         </div>
 
-        <button type="submit" class="submit-btn">Edit STORY</button>
+        <div class="form-group">
+          <label for="estTime">Estimated Time</label>
+          <input id="estTime" type="date" v-model="taskData.estTime" class="form-control" />
+        </div>
+
+        <button type="submit" class="submit-btn">Edit TASK</button>
       </form>
     </div>
   </mainLayout>
@@ -42,53 +47,58 @@ import PriorityEnum from '@/lib/domain/enums/priority'
 
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import StoryService from '@/lib/application/services/storyService'
-import ProjectService from '@/lib/application/services/projectService'
-import UserService from '@/lib/application/services/userService'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
+import TaskService from '@/lib/application/services/taskService'
 
 const route = useRoute()
 const router = useRouter()
-const storyService = new StoryService()
-const projectService = new ProjectService()
-const userService = new UserService()
+const taskService = new TaskService()
 
 const storyId = Number(route.params.storyId)
 const projectId = Number(route.params.projectId)
+const taskId = Number(route.params.taskId)
 
-const storyData = ref({
+const priorities = Object.values(PriorityEnum)
+const states = Object.values(StateEnum)
+
+const task = taskService.Details(taskId, storyId)
+
+const taskData = ref({
   name: '',
   desc: '',
   prio: PriorityEnum.low,
   state: StateEnum.todo,
+  estTime: task?.estimatedTime,
 })
 
-const currentProject = projectService.GetSelectProject()
-const currentUser = userService.GetCurrentUser()
-const story = storyService.Details(storyId, projectId)
-
 onMounted(() => {
-  if (story) {
-    storyData.value = {
-      name: story.name,
-      desc: story.desc,
-      prio: story.prio,
-      state: story.state,
+  if (task) {
+    taskData.value = {
+      name: task.name,
+      desc: task.desc,
+      prio: task.prio,
+      state: task.state,
+      estTime: task.estimatedTime,
     }
   }
 })
 
-const editStory = () => {
-  storyService.Edit(
-    storyId,
-    storyData.value.name,
-    storyData.value.desc,
-    storyData.value.prio,
-    currentProject!,
-    story!.createdAt,
-    storyData.value.state,
-    currentUser!,
+const editTask = () => {
+  taskService.Edit(
+    taskId,
+    taskData.value.name,
+    taskData.value.desc,
+    task?.story!,
+    taskData.value.prio,
+    taskData.value.estTime!,
+    taskData.value.state,
+    task?.createdAt!,
+    task?.startDate!,
+    task?.endDate!,
+    task?.signedUser!,
+    task?.user!,
   )
+
   router.push({ name: 'StoryList', params: { id: projectId } })
 }
 </script>

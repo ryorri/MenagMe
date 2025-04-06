@@ -3,9 +3,9 @@
     <div class="form-container">
       <h2>Create Story</h2>
 
-      <form @submit.prevent="createStory">
+      <form @submit.prevent="createTask">
         <div class="form-group">
-          <label for="name">Story Name</label>
+          <label for="name">Task Name</label>
           <input v-model="data.name" id="name" class="form-control" required />
         </div>
 
@@ -32,7 +32,11 @@
           </select>
         </div>
 
-        <button type="submit">Create Story</button>
+        <div class="form-group">
+          <label for="estTime">Estimated Time</label>
+          <input v-model="data.estTime" type="date" id="estTime" class="form-control" required />
+        </div>
+        <button type="submit">Create Task</button>
       </form>
     </div>
   </mainLayout>
@@ -40,41 +44,54 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import StoryService from '@/lib/application/services/storyService'
-import ProjectService from '@/lib/application/services/projectService'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
 import { useRoute, useRouter } from 'vue-router'
-import UserService from '@/lib/application/services/userService'
 import StateEnum from '@/lib/domain/enums/state'
 import PriorityEnum from '@/lib/domain/enums/priority'
-import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
+import UserService from '@/lib/application/services/userService'
+import StoryService from '@/lib/application/services/storyService'
+import TaskService from '@/lib/application/services/taskService'
+import type { StoryInterface } from '@/lib/domain/interfaces/storyInterface'
 import type { UserInterface } from '@/lib/domain/interfaces/userInterface'
 
-const data = ref({ name: '', desc: '', prio: PriorityEnum.low, date: '', state: StateEnum.todo })
-const priorities = Object.values(PriorityEnum)
-const states = Object.values(StateEnum)
-
-const projectService = new ProjectService()
-const storyService = new StoryService()
-const userService = new UserService()
 const router = useRouter()
 const route = useRoute()
 
 const projectId = Number(route.params.projectId)
+const storyId = Number(route.params.storyId)
 
+const userService = new UserService()
+const storyService = new StoryService()
+const taskService = new TaskService()
+
+const priorities = Object.values(PriorityEnum)
+const states = Object.values(StateEnum)
+const selectedStory = storyService.GetStory(storyId, projectId) as StoryInterface
 const currentUser = userService.GetCurrentUser() as UserInterface
-const currentProject = projectService.GetSelectProject() as ProjectInterface
 
-const createStory = () => {
-  storyService.Create(
+const data = ref({
+  name: '',
+  desc: '',
+  prio: PriorityEnum.low,
+  estTime: new Date(),
+  state: StateEnum.todo,
+  signedUser: null,
+})
+
+const createTask = () => {
+  taskService.Create(
     data.value.name,
     data.value.desc,
+    selectedStory,
     data.value.prio,
-    currentProject,
+    data.value.estTime,
     data.value.state,
+    null,
+    null,
+    data.value.signedUser,
     currentUser,
   )
-  router.push({ name: 'StoryList', params: { id: projectId } })
+  router.push({ name: 'StoryList', params: { projectId: projectId } })
 }
 </script>
 
