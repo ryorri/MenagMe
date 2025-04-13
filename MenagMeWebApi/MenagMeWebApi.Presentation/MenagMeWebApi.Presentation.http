@@ -1,0 +1,6 @@
+@MenagMeWebApi.Presentation_HostAddress = http://localhost:5284
+
+GET {{MenagMeWebApi.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

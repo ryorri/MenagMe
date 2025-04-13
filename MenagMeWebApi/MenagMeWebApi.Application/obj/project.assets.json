@@ -1,0 +1,102 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "MenagMeWebApi.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/MenagMeWebApi.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MenagMeWebApi.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MenagMeWebApi.Domain/1.0.0": {
+      "type": "project",
+      "path": "../MenagMeWebApi.Domain/MenagMeWebApi.Domain.csproj",
+      "msbuildProject": "../MenagMeWebApi.Domain/MenagMeWebApi.Domain.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "MenagMeWebApi.Domain >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Rafal\\.nuget\\packages\\": {},
+    "H:\\VSCommunity\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj",
+      "projectName": "MenagMeWebApi.Application",
+      "projectPath": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj",
+      "packagesPath": "C:\\Users\\Rafal\\.nuget\\packages\\",
+      "outputPath": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "H:\\VSCommunity\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Rafal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Domain\\MenagMeWebApi.Domain.csproj": {
+              "projectPath": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Domain\\MenagMeWebApi.Domain.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
