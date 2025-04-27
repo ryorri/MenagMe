@@ -84,22 +84,24 @@ import ProjectService from '@/lib/application/services/projectService'
 import UserService from '@/lib/application/services/userService'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { Backend } from '@/main'
 
 const router = useRouter()
 
 const userService = new UserService()
 const projectService = new ProjectService()
-const user = userService.GetCurrentUser()
+const user = ref()
 const projectList = ref<ProjectInterface[]>([])
 const listInterval = ref()
 const selectedProjectInterval = ref()
 const selectedProject = ref()
 
-onMounted(() => {
+onMounted(async () => {
   fetchProjectList()
   fetchSelectedProject()
   listInterval.value = setInterval(fetchProjectList, 30000)
   selectedProjectInterval.value = setInterval(fetchSelectedProject, 30000)
+  user.value = await userService.GetCurrentUser()
 })
 
 onUnmounted(() => {

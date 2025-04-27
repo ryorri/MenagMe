@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "hQMNl3VafmV8GCRCakxmpfdRm3/UdQ+rx9u8h+H+ZGw=",
+  "Source": "MenagMeWebApi.Presentation",
+  "BasePath": "_content/MenagMeWebApi.Presentation",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

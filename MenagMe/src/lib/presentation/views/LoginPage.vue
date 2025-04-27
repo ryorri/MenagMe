@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <h1>Create Story</h1>
+    <h1>Sing in</h1>
 
     <form @submit.prevent="LogIn">
       <div class="form-group">
@@ -14,21 +14,30 @@
       </div>
       <button type="submit">Login</button>
     </form>
+    <p v-if="data.error">Invalid username or password</p>
   </div>
 </template>
 
 <script setup lang="ts">
+import UserService from '@/lib/application/services/userService'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+
+const userService = new UserService()
 
 const router = useRouter()
 
 const data = ref({
   login: '',
   psw: '',
+  error: false,
 })
 
-const LogIn = () => {
-  router.push({ name: 'HomeView' })
+const LogIn = async () => {
+  const login = await userService.Login(data.value.login, data.value.psw)
+
+  if (login) {
+    router.push({ name: 'home' })
+  } else data.value.error = true
 }
 </script>

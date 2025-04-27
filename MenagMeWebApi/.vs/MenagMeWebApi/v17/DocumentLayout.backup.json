@@ -1,12 +1,173 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\seeders\\userseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\seeders\\userseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\infrastructureinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\infrastructureinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.application\\objects\\userdto\\userdatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|solutionrelative:menagmewebapi.application\\objects\\userdto\\userdatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\seeders\\roleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\seeders\\roleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\data\\databaseinitialiser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\data\\databaseinitialiser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AAB7F98-3619-4FAE-8A53-8F3BA02572D2}|MenagMeWebApi.Presentation\\MenagMeWebApi.Presentation.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.presentation\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AAB7F98-3619-4FAE-8A53-8F3BA02572D2}|MenagMeWebApi.Presentation\\MenagMeWebApi.Presentation.csproj|solutionrelative:menagmewebapi.presentation\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.application\\interfaces\\iseederinterfaces\\iroleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|solutionrelative:menagmewebapi.application\\interfaces\\iseederinterfaces\\iroleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.application\\interfaces\\serviceinterfaces\\itokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|solutionrelative:menagmewebapi.application\\interfaces\\serviceinterfaces\\itokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\Services\\UserService.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Services\\UserService.cs",
+              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Services\\UserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T11:05:04.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserSeeder.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Seeders\\UserSeeder.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\Seeders\\UserSeeder.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Seeders\\UserSeeder.cs",
+              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Seeders\\UserSeeder.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAASwC0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T09:34:04.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "InfrastructureInjection.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\InfrastructureInjection.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\InfrastructureInjection.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\InfrastructureInjection.cs",
+              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\InfrastructureInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T09:19:59.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DatabaseInitialiser.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Data\\DatabaseInitialiser.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\Data\\DatabaseInitialiser.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Data\\DatabaseInitialiser.cs",
+              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Data\\DatabaseInitialiser.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAwwDIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T09:22:18.954Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RoleSeeder.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Seeders\\RoleSeeder.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\Seeders\\RoleSeeder.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Seeders\\RoleSeeder.cs",
+              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Seeders\\RoleSeeder.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABwAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T09:18:13.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IRoleSeeder.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Interfaces\\ISeederInterfaces\\IRoleSeeder.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Application\\Interfaces\\ISeederInterfaces\\IRoleSeeder.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Interfaces\\ISeederInterfaces\\IRoleSeeder.cs",
+              "RelativeToolTip": "MenagMeWebApi.Application\\Interfaces\\ISeederInterfaces\\IRoleSeeder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T09:17:15.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Presentation\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Presentation\\Controllers\\UserController.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Presentation\\Controllers\\UserController.cs",
+              "RelativeToolTip": "MenagMeWebApi.Presentation\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T09:09:02.407Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserDataDTO.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Objects\\UserDTO\\UserDataDTO.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Application\\Objects\\UserDTO\\UserDataDTO.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Objects\\UserDTO\\UserDataDTO.cs",
+              "RelativeToolTip": "MenagMeWebApi.Application\\Objects\\UserDTO\\UserDataDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T10:46:13.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ITokenService.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Interfaces\\ServiceInterfaces\\ITokenService.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Application\\Interfaces\\ServiceInterfaces\\ITokenService.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Interfaces\\ServiceInterfaces\\ITokenService.cs",
+              "RelativeToolTip": "MenagMeWebApi.Application\\Interfaces\\ServiceInterfaces\\ITokenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T09:16:21.561Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

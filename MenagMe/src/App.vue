@@ -10,8 +10,6 @@ onMounted(() => {
   userService.Create(0, 'Jan', 'Adminowy', RolesEnum.admin)
   userService.Create(1, 'Józef', 'DevOpsowy', RolesEnum.devops)
   userService.Create(2, 'Michał', 'Developerowy', RolesEnum.dev)
-
-  userService.Login('Jan', 'Adminowy')
 })
 </script>
 

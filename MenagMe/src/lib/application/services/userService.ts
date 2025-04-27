@@ -1,45 +1,49 @@
 import type { UserInterface } from '@/lib/domain/interfaces/userInterface'
 import User from '../../domain/models/user'
 import type RolesEnum from '@/lib/domain/enums/roles'
+import { Backend } from '@/main'
+import type { UserDataDTO } from '@/backend/BaseApi'
+import { JsxEmit } from 'typescript'
 
 class UserService {
   constructor() {}
 
-  GetCurrentUser(): UserInterface | null {
-    const userRaw = localStorage.getItem('currentUser')
+  async GetCurrentUser(): Promise<UserDataDTO | undefined> {
+    try {
+      const userDataRaw = localStorage.getItem('loggedUser')
 
-    if (userRaw) {
-      const user = JSON.parse(userRaw)
-      return user
-    } else return null
+      if (userDataRaw) {
+        const userDataParsed = JSON.parse(userDataRaw)
+        const user = await Backend.getUser(userDataParsed.result.id)
+        return user
+      }
+    } catch (ex) {
+      console.log(ex)
+    }
   }
 
-  GetUserList(): UserInterface[] {
-    let result = [] as UserInterface[]
-
-    for (let i = 0; i < localStorage.length; i++) {
-      const maybeUser = localStorage.key(i)
-
-      if (maybeUser && maybeUser.includes('user')) {
-        const userData = localStorage.getItem(maybeUser)
-
-        if (userData) {
-          result.push(JSON.parse(userData))
-        }
-      }
+  async GetUserList(): Promise<UserDataDTO[] | undefined> {
+    try {
+      const userList = await Backend.getUserList()
+      return userList
+    } catch (ex) {
+      console.log(ex)
     }
-    return result
   }
   Create(id: number, name: string, sur: string, role: RolesEnum) {
     const user = new User(id, name, sur, role)
 
     localStorage.setItem('user' + name + sur, JSON.stringify(user))
   }
-  Login(name: string, sur: string) {
-    const user = localStorage.getItem('user' + name + sur)
-
-    if (user) {
-      localStorage.setItem('currentUser', user)
+  async Login(name: string, psw: string) {
+    try {
+      const user = await Backend.logIn(name, psw)
+      if (user) {
+        localStorage.setItem('loggedUser', JSON.stringify(user))
+        return true
+      }
+    } catch {
+      return false
     }
   }
 }
