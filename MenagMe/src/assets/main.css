@@ -1,0 +1,23 @@
+/* Dark mode styles */
+.dark-mode {
+  background-color: #7e7e7e;
+  color: #ffffff;
+}
+
+.dark-mode .bg-dark {
+  background-color: #1e1e1e !important;
+}
+
+.dark-mode .text-white {
+  color: #ffffff !important;
+}
+
+.dark-mode .btn-outline-light {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.dark-mode .btn-outline-light:hover {
+  background-color: #ffffff;
+  color: #121212;
+}

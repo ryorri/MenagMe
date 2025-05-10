@@ -1,11 +1,20 @@
 <template>
   <mainLayout>
-    <button class="btn btn-success mb-4 create-project-btn" @click="goToCreateProject">
+    <button
+      class="btn mb-4 create-project-btn"
+      :class="themeStore.isDarkMode ? 'btn-dark' : 'btn-success'"
+      @click="goToCreateProject"
+    >
       Create PROJECT
     </button>
 
-    <table class="table table-striped table-bordered">
-      <thead class="table-success">
+    <table
+      :class="[
+        'table table-striped table-bordered',
+        themeStore.isDarkMode ? 'table-dark' : 'table-light',
+      ]"
+    >
+      <thead :class="[themeStore.isDarkMode ? 'table-dark' : 'table-success']">
         <tr>
           <th>Name</th>
           <th>Description</th>
@@ -46,11 +55,13 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import ProjectService from '@/lib/application/services/projectService'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
+import { useThemeStore } from '@/lib/application/stores/theme'
 
 const router = useRouter()
 const projectList = ref<ProjectInterface[]>([])
 const projectService = new ProjectService()
 const noOfProjs = ref<number>(0)
+const themeStore = useThemeStore()
 
 onMounted(() => {
   noOfProjs.value = projectService.GetNoOfProjs()
@@ -84,13 +95,11 @@ const fetchProjectList = () => {
   font-weight: bold;
   font-size: 16px;
   border-radius: 5px;
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s ease;
 }
 
 .create-project-btn:hover {
-  background-color: #218838;
+  background-color: #28a745;
+  color: white;
   transform: scale(1.05);
 }
 
@@ -103,6 +112,7 @@ const fetchProjectList = () => {
   width: 100%;
   margin-top: 20px;
   border-radius: 8px;
+  border-color: #dee2e6;
 }
 
 .table th {
@@ -143,27 +153,44 @@ table button {
 table button:hover {
   transform: scale(1.05);
 }
+.table-dark {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border-color: #dee2e6;
+}
 
 .btn-info {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: #007bff; /* Default color for 'Show details' button */
+  border-color: #007bff;
   color: white;
 }
 
 .btn-info:hover {
-  background-color: #138496;
-  border-color: #138496;
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.dark-mode .btn-info {
+  background-color: #c8c9c7; /* Dark mode color for 'Show details' button */
+  border-color: white;
+  color: black;
 }
 
 .btn-warning {
-  background-color: #ffc107;
-  border-color: #ffc107;
+  background-color: #ffcc00; /* Default color for 'Edit project' button */
+  border-color: #ffcc00;
   color: black;
 }
 
 .btn-warning:hover {
-  background-color: #e0a800;
-  border-color: #e0a800;
+  background-color: #e6b800;
+  border-color: #e6b800;
+}
+
+.dark-mode .btn-warning {
+  background-color: #c8c9c7; /* Dark mode color for 'Show details' button */
+  border-color: white;
+  color: black;
 }
 
 .btn-danger {

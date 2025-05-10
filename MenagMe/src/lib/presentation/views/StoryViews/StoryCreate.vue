@@ -62,7 +62,7 @@ const route = useRoute()
 
 const projectId = Number(route.params.projectId)
 
-const currentUser = userService.GetCurrentUser() as UserInterface
+const currentUser = await userService.GetCurrentUser()
 const currentProject = projectService.GetSelectProject() as ProjectInterface
 
 const createStory = () => {

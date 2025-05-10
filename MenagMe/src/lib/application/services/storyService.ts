@@ -4,6 +4,8 @@ import StateEnum from '@/lib/domain/enums/state'
 import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
 import Story from '@/lib/domain/models/story'
 import User from '@/lib/domain/models/user'
+import type { UserInterface } from '@/lib/domain/interfaces/userInterface'
+import type { UserDataDTO } from '@/backend/BaseApi'
 
 class StoryService {
   noOfStories: number
@@ -44,7 +46,7 @@ class StoryService {
     prio: PriorityEnum,
     project: ProjectInterface,
     state: StateEnum,
-    user: User,
+    user: UserDataDTO | undefined,
   ): void {
     const story = new Story(this.noOfStories, name, desc, prio, project, new Date(), state, user)
 
@@ -74,7 +76,7 @@ class StoryService {
     project: ProjectInterface,
     createdAt: Date,
     state: StateEnum,
-    user: User,
+    user: UserDataDTO | undefined,
   ): void {
     const story = new Story(id, name, desc, prio, project, createdAt, state, user)
 

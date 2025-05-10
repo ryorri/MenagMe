@@ -1,10 +1,21 @@
 <template>
   <mainLayout>
-    <button class="btn btn-success mb-4 create-project-btn" @click="goToCreateStory">
+    <button
+      class="btn mb-4 create-project-btn"
+      :class="themeStore.isDarkMode ? 'btn-dark' : 'btn-success'"
+      @click="goToCreateStory"
+    >
       Create STORY
     </button>
 
-    <table class="table table-striped table-bordered" v-for="story in storiesList" :key="story.id">
+    <table
+      :class="[
+        'table table-striped table-bordered',
+        themeStore.isDarkMode ? 'table-dark' : 'table-light',
+      ]"
+      v-for="story in storiesList"
+      :key="story.id"
+    >
       <thead class="table-success">
         <tr>
           <th>Name</th>
@@ -37,7 +48,8 @@
               <!--TaskList-->
               <template #createbutton
                 ><button
-                  class="btn btn-success mb-4 create-project-btn"
+                  class="btn mb-4 create-project-btn"
+                  :class="themeStore.isDarkMode ? 'btn-dark' : 'btn-success'"
                   @click="goToCreateTask(story.id)"
                 >
                   Create TASK
@@ -164,6 +176,150 @@
   width: 100%;
   text-align: center;
 }
+
+/* Adjust buttons in dark mode */
+.btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+  border-color: #138496;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: black;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+
+.btn-dark {
+  background-color: #343a40;
+  border-color: #343a40;
+  color: white;
+}
+
+.btn-dark:hover {
+  background-color: #23272b;
+  border-color: #23272b;
+}
+</style>
+
+<style scoped>
+/* Table styles from ProjectList.vue */
+.table {
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 8px;
+  border-color: #dee2e6;
+}
+
+.table th {
+  text-align: center;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.table-success th {
+  background-color: #28a745;
+  color: white;
+}
+
+.table-dark {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border-color: #dee2e6;
+}
+
+.table-dark th {
+  background-color: #1d2124;
+  color: #ffffff;
+}
+
+.table-dark td {
+  background-color: #2c2c2c;
+  color: #ffffff;
+}
+
+.btn-info {
+  background-color: #007bff; /* Default color for 'Show details' button */
+  border-color: #007bff;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.dark-mode .btn-info {
+  background-color: #c8c9c7; /* Dark mode color for 'Show details' button */
+  border-color: white;
+  color: black;
+}
+
+.btn-warning {
+  background-color: #ffcc00; /* Default color for 'Edit project' button */
+  border-color: #ffcc00;
+  color: black;
+}
+
+.btn-warning:hover {
+  background-color: #e6b800;
+  border-color: #e6b800;
+}
+
+.dark-mode .btn-warning {
+  background-color: #c8c9c7; /* Dark mode color for 'Show details' button */
+  border-color: white;
+  color: black;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #c82333;
+}
 </style>
 
 <script setup lang="ts">
@@ -174,6 +330,7 @@ import StoryService from '@/lib/application/services/storyService'
 import { ref, onMounted } from 'vue'
 import taskLayout from '@/lib/presentation/layouts/taskLayout.vue'
 import TaskService from '@/lib/application/services/taskService'
+import { useThemeStore } from '@/lib/application/stores/theme'
 
 const route = useRoute()
 const router = useRouter()
@@ -185,6 +342,8 @@ const storiesService = new StoryService()
 const taskService = new TaskService()
 
 const storiesList = ref<StoryInterface[] | null>([])
+
+const themeStore = useThemeStore()
 
 const goToCreateStory = () => {
   router.push({ name: 'StoryCreate', params: { projectId: projectId } })

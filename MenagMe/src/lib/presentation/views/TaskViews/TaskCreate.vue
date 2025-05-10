@@ -36,7 +36,13 @@
           <label for="estTime">Estimated Time</label>
           <input v-model="data.estTime" type="date" id="estTime" class="form-control" required />
         </div>
-        <button type="submit">Create Task</button>
+        <button
+          type="submit"
+          class="btn create-project-btn"
+          :class="themeStore.isDarkMode ? 'btn-dark' : 'btn-success'"
+        >
+          Create Task
+        </button>
       </form>
     </div>
   </mainLayout>
@@ -53,6 +59,7 @@ import StoryService from '@/lib/application/services/storyService'
 import TaskService from '@/lib/application/services/taskService'
 import type { StoryInterface } from '@/lib/domain/interfaces/storyInterface'
 import type { UserInterface } from '@/lib/domain/interfaces/userInterface'
+import { useThemeStore } from '@/lib/application/stores/theme'
 
 const router = useRouter()
 const route = useRoute()
@@ -67,7 +74,9 @@ const taskService = new TaskService()
 const priorities = Object.values(PriorityEnum)
 const states = Object.values(StateEnum)
 const selectedStory = storyService.GetStory(storyId, projectId) as StoryInterface
-const currentUser = userService.GetCurrentUser() as UserInterface
+const currentUser = userService.GetCurrentUser()
+
+const themeStore = useThemeStore()
 
 const data = ref({
   name: '',

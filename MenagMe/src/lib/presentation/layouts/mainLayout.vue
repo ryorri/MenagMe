@@ -1,8 +1,16 @@
 <template>
-  <div class="d-flex flex-column vh-100">
+  <div
+    :class="[
+      'd-flex flex-column vh-100',
+      themeStore.isDarkMode ? 'dark-mode' : 'bg-light text-dark',
+    ]"
+  >
     <!-- Header -->
     <header
-      class="bg-success text-white p-3 d-flex justify-content-between align-items-center shadow"
+      :class="[
+        'p-3 d-flex justify-content-between align-items-center shadow',
+        themeStore.isDarkMode ? 'bg-dark text-white' : 'bg-success text-white',
+      ]"
     >
       <!--Login-->
       <div v-if="user" class="user-box d-flex align-items-center">
@@ -22,60 +30,53 @@
         </select>
       </div>
       <h2 class="m-0 text-center flex-grow-1">MenagMe</h2>
+
+      <!-- Theme Toggle -->
+      <button @click="themeStore.toggleTheme" class="btn btn-outline-light btn-sm">
+        {{ themeStore.isDarkMode ? 'Light Mode' : 'Dark Mode' }}
+      </button>
     </header>
 
     <div class="d-flex flex-grow-1">
       <!-- Sidebar -->
-      <nav class="bg-light border-end p-3 sidebar">
+      <nav :class="['p-3 sidebar', themeStore.isDarkMode ? 'dark-mode' : 'bg-light border-end']">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <button @click="goToProjects" class="nav-link text-success">📂 Projects</button>
+            <button
+              @click="goToProjects"
+              :class="['nav-link', themeStore.isDarkMode ? 'text-white' : 'text-success']"
+            >
+              📂 Projects
+            </button>
           </li>
           <li class="nav-item">
-            <button @click="goToStories" class="nav-link text-success">📂 Stories</button>
+            <button
+              @click="goToStories"
+              :class="['nav-link', themeStore.isDarkMode ? 'text-white' : 'text-success']"
+            >
+              📂 Stories
+            </button>
           </li>
         </ul>
       </nav>
 
       <!-- Main -->
-      <main class="p-4 flex-grow-1 bg-light">
+      <main :class="['p-4 flex-grow-1', themeStore.isDarkMode ? 'dark-mode' : 'bg-light']">
         <slot />
       </main>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-success text-white text-center p-2">
+    <footer
+      :class="[
+        'text-center p-2',
+        themeStore.isDarkMode ? 'bg-dark text-white' : 'bg-success text-white',
+      ]"
+    >
       <p>&copy; 2025 MenagMe</p>
     </footer>
   </div>
 </template>
-
-<style scoped>
-.sidebar {
-  width: 250px;
-}
-
-.nav-link {
-  font-weight: bold;
-}
-
-.nav-link:hover {
-  background-color: #28a745;
-  color: white !important;
-  border-radius: 5px;
-}
-
-.user-box {
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 2px solid white;
-  border-radius: 10px;
-  padding: 5px 10px;
-  font-weight: bold;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-  width: 10vw;
-  height: 8vh;
-}
-</style>
 
 <script setup lang="ts">
 import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
@@ -85,6 +86,7 @@ import UserService from '@/lib/application/services/userService'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Backend } from '@/main'
+import { useThemeStore } from '@/lib/application/stores/theme'
 
 const router = useRouter()
 
@@ -96,7 +98,11 @@ const listInterval = ref()
 const selectedProjectInterval = ref()
 const selectedProject = ref()
 
+const themeStore = useThemeStore()
+
 onMounted(async () => {
+  themeStore.initializeTheme()
+
   fetchProjectList()
   fetchSelectedProject()
   listInterval.value = setInterval(fetchProjectList, 30000)
@@ -149,3 +155,44 @@ const goToStories = () => {
   }
 }
 </script>
+
+<style scoped>
+.sidebar {
+  width: 250px;
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+.sidebar.light-mode {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.nav-link {
+  font-weight: bold;
+  color: inherit;
+  background-color: transparent;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  padding: 10px 15px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.nav-link:hover {
+  background-color: #28a745;
+  color: white !important;
+  border-color: #28a745;
+}
+
+.user-box {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  width: 10vw;
+  height: 8vh;
+}
+</style>

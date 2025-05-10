@@ -1,3 +1,4 @@
+import type { UserDataDTO } from '@/backend/BaseApi'
 import type PriorityEnum from '../enums/priority'
 import type StateEnum from '../enums/state'
 import type { StoryInterface } from '../interfaces/storyInterface'
@@ -15,8 +16,8 @@ class Task implements TaskInterface {
   createdAt: Date
   startDate: Date | null
   endDate: Date | null
-  user: User
-  signedUser: User | null
+  user: UserDataDTO | undefined
+  signedUser: UserDataDTO | undefined
 
   constructor(
     id: number,
@@ -29,8 +30,8 @@ class Task implements TaskInterface {
     createdAt: Date,
     startDate: Date | null,
     endDate: Date | null,
-    signedUser: User | null,
-    user: User,
+    signedUser: UserDataDTO | undefined,
+    user: UserDataDTO | undefined,
   ) {
     this.id = id
     this.name = name

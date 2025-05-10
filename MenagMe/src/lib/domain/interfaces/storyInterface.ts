@@ -1,3 +1,4 @@
+import type { UserDataDTO } from '@/backend/BaseApi'
 import type PriorityEnum from '../enums/priority'
 import type StateEnum from '../enums/state'
 import type Project from '../models/project'
@@ -11,5 +12,5 @@ export interface StoryInterface {
   project: Project
   createdAt: Date
   state: StateEnum
-  user: User
+  user: UserDataDTO | undefined
 }

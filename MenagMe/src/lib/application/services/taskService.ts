@@ -1,3 +1,4 @@
+import type { UserDataDTO } from '@/backend/BaseApi'
 import type PriorityEnum from '@/lib/domain/enums/priority'
 import type StateEnum from '@/lib/domain/enums/state'
 import type { StoryInterface } from '@/lib/domain/interfaces/storyInterface'
@@ -41,7 +42,7 @@ class TaskService {
     )
   }
 
-  AssignUser(selectedTask: TaskInterface, assignedUser: UserInterface | null) {
+  AssignUser(selectedTask: TaskInterface, assignedUser: UserDataDTO | undefined) {
     selectedTask.signedUser = assignedUser
     localStorage.setItem(
       `task${selectedTask.id}_story${selectedTask.story.id}_proj${this.selectedProjId}`,
@@ -72,8 +73,8 @@ class TaskService {
     state: StateEnum,
     startDate: Date | null,
     endDate: Date | null,
-    signedUser: UserInterface | null,
-    user: UserInterface,
+    signedUser: UserDataDTO | undefined,
+    user: UserDataDTO,
   ): void {
     const task = new Task(
       this.noOfTasks,
@@ -120,8 +121,8 @@ class TaskService {
     createdAt: Date,
     startDate: Date | null,
     endDate: Date | null,
-    signedUser: UserInterface | null,
-    user: UserInterface,
+    signedUser: UserDataDTO | undefined,
+    user: UserDataDTO | undefined,
   ): void {
     const task = new Task(
       id,

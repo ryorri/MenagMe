@@ -3,6 +3,7 @@ import type StateEnum from '../enums/state'
 import type Project from './project'
 import type User from './user'
 import type { StoryInterface } from '../interfaces/storyInterface'
+import type { UserDataDTO } from '@/backend/BaseApi'
 
 class Story implements StoryInterface {
   id: number
@@ -12,7 +13,7 @@ class Story implements StoryInterface {
   project: Project
   createdAt: Date
   state: StateEnum
-  user: User
+  user: UserDataDTO | undefined
 
   constructor(
     id: number,
@@ -22,7 +23,7 @@ class Story implements StoryInterface {
     project: Project,
     createdAt: Date,
     state: StateEnum,
-    user: User,
+    user: UserDataDTO | undefined,
   ) {
     this.id = id
     this.name = name

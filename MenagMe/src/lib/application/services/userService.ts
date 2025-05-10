@@ -30,7 +30,7 @@ class UserService {
       console.log(ex)
     }
   }
-  Create(id: number, name: string, sur: string, role: RolesEnum) {
+  Create(id: string, name: string, sur: string, role: RolesEnum) {
     const user = new User(id, name, sur, role)
 
     localStorage.setItem('user' + name + sur, JSON.stringify(user))

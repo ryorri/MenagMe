@@ -24,7 +24,13 @@
         ></textarea>
       </div>
 
-      <button type="submit" class="btn btn-success">Create project</button>
+      <button
+        type="submit"
+        class="btn create-project-btn"
+        :class="themeStore.isDarkMode ? 'btn-dark' : 'btn-success'"
+      >
+        Create project
+      </button>
     </form>
   </mainLayout>
 </template>
@@ -34,10 +40,15 @@ import { ref } from 'vue'
 import ProjectService from '@/lib/application/services/projectService'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
 import { useRouter } from 'vue-router'
+import { useThemeStore } from '@/lib/application/stores/theme'
 
 const data = ref({ name: '', desc: '' })
 const service = new ProjectService()
 const router = useRouter()
+const themeStore = useThemeStore()
+
+// Initialize theme on component mount
+themeStore.initializeTheme()
 
 const createProject = () => {
   service.Create(data.value.name, data.value.desc)
@@ -47,6 +58,38 @@ const createProject = () => {
 </script>
 
 <style scoped>
+.create-project-btn {
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.create-project-btn.btn-dark {
+  background-color: #343a40; /* Darker background for dark mode */
+  color: white;
+  border: none;
+}
+
+.create-project-btn.btn-dark:hover {
+  background-color: #23272b; /* Updated hover color for dark mode */
+}
+
+.create-project-btn.btn-success {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
+.create-project-btn.btn-success:hover {
+  background-color: #218838;
+}
+
+.create-project-btn:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(33, 136, 56, 0.7);
+}
+
 .form-container {
   max-width: 500px;
   margin: 0 auto;
@@ -81,28 +124,5 @@ label {
 .form-control:focus {
   border-color: #28a745;
   outline: none;
-}
-
-button[type='submit'] {
-  padding: 12px 25px;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s ease;
-}
-
-button[type='submit']:hover {
-  background-color: #218838;
-  transform: scale(1.05);
-}
-
-button[type='submit']:focus {
-  outline: none;
-  box-shadow: 0 0 10px rgba(33, 136, 56, 0.7);
 }
 </style>
