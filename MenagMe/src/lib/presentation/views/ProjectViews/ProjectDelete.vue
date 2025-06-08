@@ -1,8 +1,9 @@
 <template>
   <mainLayout>
-    <div class="project-details">
+    <div v-if="!project">Loading...</div>
+    <div v-else class="project-details">
       <h2 class="project-name">{{ project?.name }}</h2>
-      <p class="project-description">{{ project?.desc }}</p>
+      <p class="project-description">{{ project?.description }}</p>
 
       <div class="confirmation-box">
         <h3>Are you sure?</h3>
@@ -18,20 +19,33 @@
 import ProjectService from '@/lib/application/services/projectService'
 import { useRoute, useRouter } from 'vue-router'
 import mainLayout from '../../layouts/mainLayout.vue'
+import { onMounted, ref } from 'vue'
+import type { ProjectDataDTO } from '@/backend/BaseApi'
 
 const route = useRoute()
 const router = useRouter()
 
-const projectId = Number(route.params.id)
+const projectId = String(route.params.id)
 
 const projectService = new ProjectService()
 
-const project = projectService.Details(projectId)
+const project = ref()
 
-const deleteProject = (id: number) => {
-  projectService.Delete(id)
+const deleteProject = (id: string) => {
+  projectService.DeleteProject(id)
   router.push({ name: 'ProjectList' })
 }
+
+onMounted(async () => {
+  const proj = await projectService.GetProject(projectId)
+  if (proj) {
+    project.value = {
+      id: proj.id,
+      name: proj.name,
+      description: proj.description,
+    }
+  }
+})
 </script>
 
 <style scoped>

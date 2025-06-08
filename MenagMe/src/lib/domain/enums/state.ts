@@ -1,6 +1,6 @@
 enum StateEnum {
   todo = 'TODO',
-  inProgress = 'IN PROGRESS',
+  inProgress = 'INPROGRESS',
   done = 'DONE',
 }
 

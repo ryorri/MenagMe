@@ -5,19 +5,21 @@
       <p class="task-desc">{{ task?.desc }}</p>
 
       <div class="task-info">
-        <p><strong>Priority:</strong> {{ task?.prio }}</p>
-        <p><strong>State:</strong> {{ task?.state }}</p>
-        <p><strong>Created At:</strong> {{ task?.createdAt }}</p>
-        <p><strong>Assigned user :</strong> {{ task?.signedUser?.name }}</p>
+        <p><strong>Priority:</strong> {{ task?.priority }}</p>
+        <p><strong>State:</strong> {{ task?.status }}</p>
+        <p><strong>Created At:</strong> {{ formatDate(task?.createdAt) }}</p>
+        <p v-if="user">
+          <strong>Assigned user :</strong> {{ user?.name }} {{ user?.surname }} ({{ user?.role }})
+        </p>
       </div>
     </div>
 
     <form @submit.prevent="assignUser">
       <div class="form-group">
         <label for="signedUser">Assigned User</label>
-        <select v-model="data.signedUser" id="signedUser" class="form-control">
+        <select v-model="data.user" id="signedUser" class="form-control">
           <option value="" disabled selected>Select a user</option>
-          <option v-for="user in allUsers" :key="user.id" :value="user">
+          <option v-for="user in allUsers" :key="user.id" :value="user.id">
             {{ user.name }} {{ user.surname }} ({{ user.role }})
           </option>
         </select>
@@ -41,34 +43,48 @@ import { useRoute, useRouter } from 'vue-router'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
 import TaskService from '@/lib/application/services/taskService'
 import StateEnum from '@/lib/domain/enums/state'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import UserService from '@/lib/application/services/userService'
+import { formatDate } from '@/lib/application/extensions/dateFormatter'
 
 const router = useRouter()
 const route = useRoute()
 const taskService = new TaskService()
 const userService = new UserService()
 
-const projectId = Number(route.params.projectId)
-const storyId = Number(route.params.storyId)
-const taskId = Number(route.params.taskId)
+const projectId = String(route.params.projectId)
+const storyId = String(route.params.storyId)
+const taskId = String(route.params.taskId)
 const states = Object.values(StateEnum)
 
-const task = taskService.Details(taskId, storyId)
+const task = ref()
 
-const allUsers = userService.GetUserList()
-
+const allUsers = ref()
+const user = ref()
 const data = ref({
-  signedUser: null,
+  user: '',
   state: StateEnum.todo,
 })
 
-const assignUser = () => {
-  taskService.AssignUser(task!, data.value.signedUser)
+const assignUser = async () => {
+  console.log('Assigning user:', data.value.user, 'to task:', taskId)
+  await taskService.AssignUser(taskId, data.value.user)
 
-  taskService.ChangeState(task!, data.value.state)
+  await taskService.UpdateTaskStatus(taskId, data.value.state)
   router.push({ name: 'StoryList', params: { projectId: projectId } })
 }
+onMounted(async () => {
+  task.value = await taskService.GetTask(taskId)
+  const users = await userService.GetUserList()
+  console.log('Task:', task.value)
+  if (task) {
+    user.value = await userService.GetUser(task.value.assignedUserId)
+    console.log('User:', user.value)
+  }
+  if (users)
+    allUsers.value = users.filter((user) => user.role == 'Developer' || user.role == 'DevOps')
+  //console.log('Assigning user:', allUsers)
+})
 </script>
 
 <style scoped>

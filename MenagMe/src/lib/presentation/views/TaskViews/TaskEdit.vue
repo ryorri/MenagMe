@@ -4,17 +4,22 @@
       <form @submit.prevent="editTask">
         <div class="form-group">
           <label for="name">Name</label>
-          <input id="name" v-model="taskData.name" type="text" class="form-control" required />
+          <input id="name" v-model="editedTask.name" type="text" class="form-control" required />
         </div>
 
         <div class="form-group">
           <label for="desc">Description</label>
-          <textarea id="desc" v-model="taskData.desc" class="form-control" required></textarea>
+          <textarea
+            id="desc"
+            v-model="editedTask.description"
+            class="form-control"
+            required
+          ></textarea>
         </div>
 
         <div class="form-group">
           <label for="prio">Priority</label>
-          <select v-model="taskData.prio" id="prio" class="form-control">
+          <select v-model="editedTask.priority" id="prio" class="form-control">
             <option v-for="priority in priorities" :key="priority" :value="priority">
               {{ priority }}
             </option>
@@ -22,17 +27,8 @@
         </div>
 
         <div class="form-group">
-          <label for="state">State</label>
-          <select v-model="taskData.state" id="state" class="form-control">
-            <option v-for="state in states" :key="state" :value="state">
-              {{ state }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
           <label for="estTime">Estimated Time</label>
-          <input id="estTime" type="date" v-model="taskData.estTime" class="form-control" />
+          <input id="estTime" type="date" v-model="editedTask.estimatedTime" class="form-control" />
         </div>
 
         <button type="submit" class="submit-btn">Edit TASK</button>
@@ -49,56 +45,64 @@ import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
 import TaskService from '@/lib/application/services/taskService'
+import type { TasksDataDTO } from '@/backend/BaseApi'
 
 const route = useRoute()
 const router = useRouter()
 const taskService = new TaskService()
 
-const storyId = Number(route.params.storyId)
-const projectId = Number(route.params.projectId)
-const taskId = Number(route.params.taskId)
+const storyId = String(route.params.storyId)
+const projectId = String(route.params.projectId)
+const taskId = String(route.params.taskId)
 
 const priorities = Object.values(PriorityEnum)
 const states = Object.values(StateEnum)
 
-const task = taskService.Details(taskId, storyId)
-
-const taskData = ref({
+const editedTask = ref({
+  id: '',
   name: '',
-  desc: '',
-  prio: PriorityEnum.low,
-  state: StateEnum.todo,
-  estTime: task?.estimatedTime,
+  description: '',
+  priority: '',
+  status: '',
+  createdAt: '',
+  userId: '',
+  storyId: '',
+  estimatedTime: '',
+  startDate: '',
+  endDate: '',
+  assignedUserId: '',
 })
 
-onMounted(() => {
+onMounted(async () => {
+  const task = await taskService.GetTask(taskId)
   if (task) {
-    taskData.value = {
-      name: task.name,
-      desc: task.desc,
-      prio: task.prio,
-      state: task.state,
-      estTime: task.estimatedTime,
+    editedTask.value = {
+      id: task?.id || '',
+      name: task?.name || '',
+      description: task?.description || '',
+      priority: task?.priority || PriorityEnum.low,
+      status: task?.status || StateEnum.todo,
+      estimatedTime: task?.estimatedTime ? String(task.estimatedTime) : String(Date.now()),
+      userId: task?.userId || '',
+      storyId: task?.storyId || '',
+      createdAt: task?.createdAt ? String(task.createdAt) : String(Date.now()),
+      startDate: task?.startDate ? String(task.startDate) : '',
+      endDate: task?.endDate ? String(task.endDate) : '',
+      assignedUserId: task?.assignedUserId || '',
     }
   }
 })
 
-const editTask = () => {
-  taskService.Edit(
-    taskId,
-    taskData.value.name,
-    taskData.value.desc,
-    task?.story!,
-    taskData.value.prio,
-    taskData.value.estTime!,
-    taskData.value.state,
-    task?.createdAt!,
-    task?.startDate!,
-    task?.endDate!,
-    task?.signedUser!,
-    task?.user!,
-  )
-
+const editTask = async () => {
+  // Convert fields to correct types for TasksDataDTO
+  const updatedTask: TasksDataDTO = {
+    ...editedTask.value,
+    createdAt: new Date(editedTask.value.createdAt),
+    estimatedTime: new Date(editedTask.value.estimatedTime),
+    startDate: editedTask.value.startDate ? new Date(editedTask.value.startDate) : undefined,
+    endDate: editedTask.value.endDate ? new Date(editedTask.value.endDate) : undefined,
+  }
+  await taskService.UpdateTask(taskId, updatedTask)
   router.push({ name: 'StoryList', params: { id: projectId } })
 }
 </script>

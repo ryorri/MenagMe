@@ -7,36 +7,28 @@
       "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\seeders\\userseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\seeders\\userseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\infrastructureinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\infrastructureinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.application\\objects\\userdto\\userdatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|solutionrelative:menagmewebapi.application\\objects\\userdto\\userdatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\seeders\\roleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\seeders\\roleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\data\\databaseinitialiser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\data\\databaseinitialiser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4AAB7F98-3619-4FAE-8A53-8F3BA02572D2}|MenagMeWebApi.Presentation\\MenagMeWebApi.Presentation.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.presentation\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4AAB7F98-3619-4FAE-8A53-8F3BA02572D2}|MenagMeWebApi.Presentation\\MenagMeWebApi.Presentation.csproj|solutionrelative:menagmewebapi.presentation\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.application\\interfaces\\iseederinterfaces\\iroleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|solutionrelative:menagmewebapi.application\\interfaces\\iseederinterfaces\\iroleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4AAB7F98-3619-4FAE-8A53-8F3BA02572D2}|MenagMeWebApi.Presentation\\MenagMeWebApi.Presentation.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.presentation\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AAB7F98-3619-4FAE-8A53-8F3BA02572D2}|MenagMeWebApi.Presentation\\MenagMeWebApi.Presentation.csproj|solutionrelative:menagmewebapi.presentation\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.application\\interfaces\\serviceinterfaces\\itokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1AF7524-EE78-4B4F-9D16-9D1D0026EF88}|MenagMeWebApi.Application\\MenagMeWebApi.Application.csproj|solutionrelative:menagmewebapi.application\\interfaces\\serviceinterfaces\\itokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\services\\storyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\services\\storyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\services\\tasksservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\services\\tasksservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.infrastructure\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{240772C8-9DC2-473A-8229-053C485711E5}|MenagMeWebApi.Infrastructure\\MenagMeWebApi.Infrastructure.csproj|solutionrelative:menagmewebapi.infrastructure\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AAB7F98-3619-4FAE-8A53-8F3BA02572D2}|MenagMeWebApi.Presentation\\MenagMeWebApi.Presentation.csproj|g:\\studia\\semestr vi\\programowanie aplikacji webowych\\projekt\\menagmewebapi\\menagmewebapi.presentation\\controllers\\storycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AAB7F98-3619-4FAE-8A53-8F3BA02572D2}|MenagMeWebApi.Presentation\\MenagMeWebApi.Presentation.csproj|solutionrelative:menagmewebapi.presentation\\controllers\\storycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -56,114 +48,102 @@
               "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\Services\\UserService.cs",
               "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Services\\UserService.cs",
               "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Services\\UserService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAowD0AAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T11:05:04.944Z",
+              "WhenOpened": "2025-06-08T21:27:19.64Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserSeeder.cs",
-              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Seeders\\UserSeeder.cs",
-              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\Seeders\\UserSeeder.cs",
-              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Seeders\\UserSeeder.cs",
-              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Seeders\\UserSeeder.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAASwC0AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:34:04.776Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "InfrastructureInjection.cs",
-              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\InfrastructureInjection.cs",
-              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\InfrastructureInjection.cs",
-              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\InfrastructureInjection.cs",
-              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\InfrastructureInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:19:59.819Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DatabaseInitialiser.cs",
-              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Data\\DatabaseInitialiser.cs",
-              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\Data\\DatabaseInitialiser.cs",
-              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Data\\DatabaseInitialiser.cs",
-              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Data\\DatabaseInitialiser.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAwwDIAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:22:18.954Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "RoleSeeder.cs",
-              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Seeders\\RoleSeeder.cs",
-              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\Seeders\\RoleSeeder.cs",
-              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Seeders\\RoleSeeder.cs",
-              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Seeders\\RoleSeeder.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABwAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:18:13.42Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "IRoleSeeder.cs",
-              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Interfaces\\ISeederInterfaces\\IRoleSeeder.cs",
-              "RelativeDocumentMoniker": "MenagMeWebApi.Application\\Interfaces\\ISeederInterfaces\\IRoleSeeder.cs",
-              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Interfaces\\ISeederInterfaces\\IRoleSeeder.cs",
-              "RelativeToolTip": "MenagMeWebApi.Application\\Interfaces\\ISeederInterfaces\\IRoleSeeder.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:17:15.299Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "UserController.cs",
               "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Presentation\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "MenagMeWebApi.Presentation\\Controllers\\UserController.cs",
               "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Presentation\\Controllers\\UserController.cs",
               "RelativeToolTip": "MenagMeWebApi.Presentation\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAIwGUAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:09:02.407Z",
+              "WhenOpened": "2025-06-08T21:26:58.04Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\Services\\TokenService.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Services\\TokenService.cs",
+              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Services\\TokenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T20:24:48.057Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StoryController.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Presentation\\Controllers\\StoryController.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Presentation\\Controllers\\StoryController.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Presentation\\Controllers\\StoryController.cs",
+              "RelativeToolTip": "MenagMeWebApi.Presentation\\Controllers\\StoryController.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAmwHUAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T20:23:53.146Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TasksController.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Presentation\\Controllers\\TasksController.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Presentation\\Controllers\\TasksController.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Presentation\\Controllers\\TasksController.cs",
+              "RelativeToolTip": "MenagMeWebApi.Presentation\\Controllers\\TasksController.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAAwJIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T09:28:50.289Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "UserDataDTO.cs",
-              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Objects\\UserDTO\\UserDataDTO.cs",
-              "RelativeDocumentMoniker": "MenagMeWebApi.Application\\Objects\\UserDTO\\UserDataDTO.cs",
-              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Objects\\UserDTO\\UserDataDTO.cs",
-              "RelativeToolTip": "MenagMeWebApi.Application\\Objects\\UserDTO\\UserDataDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Title": "StoryService.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Services\\StoryService.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\Services\\StoryService.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Services\\StoryService.cs",
+              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Services\\StoryService.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAgwHwAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T10:46:13.061Z",
+              "WhenOpened": "2025-06-08T09:28:01.063Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ITokenService.cs",
-              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Interfaces\\ServiceInterfaces\\ITokenService.cs",
-              "RelativeDocumentMoniker": "MenagMeWebApi.Application\\Interfaces\\ServiceInterfaces\\ITokenService.cs",
-              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Application\\Interfaces\\ServiceInterfaces\\ITokenService.cs",
-              "RelativeToolTip": "MenagMeWebApi.Application\\Interfaces\\ServiceInterfaces\\ITokenService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "TasksService.cs",
+              "DocumentMoniker": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Services\\TasksService.cs",
+              "RelativeDocumentMoniker": "MenagMeWebApi.Infrastructure\\Services\\TasksService.cs",
+              "ToolTip": "G:\\Studia\\Semestr VI\\Programowanie aplikacji webowych\\Projekt\\MenagMeWebApi\\MenagMeWebApi.Infrastructure\\Services\\TasksService.cs",
+              "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Services\\TasksService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAwMAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T09:16:21.561Z",
+              "WhenOpened": "2025-06-08T09:27:05.451Z",
               "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
             }
           ]
         }

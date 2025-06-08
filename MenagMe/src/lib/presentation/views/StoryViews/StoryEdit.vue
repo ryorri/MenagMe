@@ -1,20 +1,28 @@
 <template>
   <mainLayout>
-    <div class="form-container">
+    <div v-if="!loading">
+      <p>Loading ...</p>
+    </div>
+    <div v-else class="form-container">
       <form @submit.prevent="editStory">
         <div class="form-group">
           <label for="name">Name</label>
-          <input id="name" v-model="storyData.name" type="text" class="form-control" required />
+          <input id="name" v-model="editedStory.name" type="text" class="form-control" required />
         </div>
 
         <div class="form-group">
           <label for="desc">Description</label>
-          <textarea id="desc" v-model="storyData.desc" class="form-control" required></textarea>
+          <textarea
+            id="desc"
+            v-model="editedStory.description"
+            class="form-control"
+            required
+          ></textarea>
         </div>
 
         <div class="form-group">
           <label for="prio">Priority</label>
-          <select id="prio" v-model="storyData.prio" class="form-control" required>
+          <select id="prio" v-model="editedStory.priority" class="form-control" required>
             <option v-for="(label, key) in PriorityEnum" :key="key" :value="key">
               {{ label }}
             </option>
@@ -23,7 +31,7 @@
 
         <div class="form-group">
           <label for="state">State</label>
-          <select id="state" v-model="storyData.state" class="form-control" required>
+          <select id="state" v-model="editedStory.status" class="form-control" required>
             <option v-for="(label, key) in StateEnum" :key="key" :value="key">
               {{ label }}
             </option>
@@ -46,6 +54,7 @@ import StoryService from '@/lib/application/services/storyService'
 import ProjectService from '@/lib/application/services/projectService'
 import UserService from '@/lib/application/services/userService'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
+import type { StoryDataDTO } from '@/backend/BaseApi'
 
 const route = useRoute()
 const router = useRouter()
@@ -53,42 +62,46 @@ const storyService = new StoryService()
 const projectService = new ProjectService()
 const userService = new UserService()
 
-const storyId = Number(route.params.storyId)
-const projectId = Number(route.params.projectId)
+const storyId = String(route.params.storyId)
+const projectId = String(route.params.projectId)
 
-const storyData = ref({
-  name: '',
-  desc: '',
-  prio: PriorityEnum.low,
-  state: StateEnum.todo,
+const userId = ref()
+const editedStory = ref()
+const project = ref()
+const user = ref()
+const loading = ref(false)
+
+onMounted(async () => {
+  await fetchStoryData()
+  await fetchProjectData()
+  await fetchUserData()
+  loading.value = true
 })
 
-const currentProject = projectService.GetSelectProject()
-const currentUser = userService.GetCurrentUser()
-const story = storyService.Details(storyId, projectId)
-
-onMounted(() => {
+const fetchStoryData = async () => {
+  const story = await storyService.GetStory(storyId)
   if (story) {
-    storyData.value = {
+    userId.value = story.userId
+    editedStory.value = {
+      id: story.id,
       name: story.name,
-      desc: story.desc,
-      prio: story.prio,
-      state: story.state,
+      description: story.description,
+      priority: story.priority,
+      status: story.status,
+      userId: story.userId,
+      projectId: story.projectId,
     }
   }
-})
+}
+const fetchProjectData = async () => {
+  project.value = await projectService.GetProject(projectId)
+}
+const fetchUserData = async () => {
+  user.value = await userService.GetUser(userId.value)
+}
 
-const editStory = () => {
-  storyService.Edit(
-    storyId,
-    storyData.value.name,
-    storyData.value.desc,
-    storyData.value.prio,
-    currentProject!,
-    story!.createdAt,
-    storyData.value.state,
-    currentUser!,
-  )
+const editStory = async () => {
+  await storyService.UpdateStory(storyId, editedStory.value)
   router.push({ name: 'StoryList', params: { id: projectId } })
 }
 </script>

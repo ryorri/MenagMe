@@ -8,7 +8,9 @@
       Create PROJECT
     </button>
 
+    <div v-if="!projectList">Loading...</div>
     <table
+      v-else
       :class="[
         'table table-striped table-bordered',
         themeStore.isDarkMode ? 'table-dark' : 'table-light',
@@ -26,7 +28,7 @@
       <tbody>
         <tr v-for="project in projectList" :key="project.id">
           <td>{{ project.name }}</td>
-          <td>{{ project.desc }}</td>
+          <td>{{ project.description }}</td>
           <td>
             <button class="btn btn-info" @click="goToDetailsProject(project.id)">
               Show details
@@ -49,22 +51,19 @@
 </template>
 
 <script setup lang="ts">
-import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
-
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import ProjectService from '@/lib/application/services/projectService'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
 import { useThemeStore } from '@/lib/application/stores/theme'
+import type { ProjectDataDTO } from '@/backend/BaseApi'
 
 const router = useRouter()
-const projectList = ref<ProjectInterface[]>([])
+const projectList = ref<ProjectDataDTO[]>([])
 const projectService = new ProjectService()
-const noOfProjs = ref<number>(0)
 const themeStore = useThemeStore()
 
 onMounted(() => {
-  noOfProjs.value = projectService.GetNoOfProjs()
   fetchProjectList()
 })
 
@@ -72,20 +71,23 @@ const goToCreateProject = () => {
   router.push({ name: 'ProjectCreate' })
 }
 
-const goToDetailsProject = (projId: number) => {
+const goToDetailsProject = (projId: string | undefined) => {
   router.push({ name: 'ProjectDetals', params: { id: projId } })
 }
 
-const goToDeleteProject = (projId: number) => {
+const goToDeleteProject = (projId: string | undefined) => {
   router.push({ name: 'ProjectDelete', params: { id: projId } })
 }
 
-const goToEditProject = (projId: number) => {
+const goToEditProject = (projId: string | undefined) => {
   router.push({ name: 'ProjectEdit', params: { id: projId } })
 }
 
-const fetchProjectList = () => {
-  projectList.value = projectService.GetProjectsList()
+const fetchProjectList = async () => {
+  const list = await projectService.GetProjectList()
+  if (list) {
+    projectList.value = list
+  }
 }
 </script>
 

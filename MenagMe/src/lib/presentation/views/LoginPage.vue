@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import UserService from '@/lib/application/services/userService'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const userService = new UserService()
@@ -40,4 +40,11 @@ const LogIn = async () => {
     router.push({ name: 'home' })
   } else data.value.error = true
 }
+
+onMounted(() => {
+  // Reset login state on mount
+  data.value.login = ''
+  data.value.psw = ''
+  data.value.error = false
+})
 </script>

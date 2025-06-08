@@ -11,12 +11,12 @@
 
         <div class="form-group">
           <label for="desc">Description</label>
-          <textarea v-model="data.desc" id="desc" class="form-control" required></textarea>
+          <textarea v-model="data.description" id="desc" class="form-control" required></textarea>
         </div>
 
         <div class="form-group">
           <label for="prio">Priority</label>
-          <select v-model="data.prio" id="prio" class="form-control">
+          <select v-model="data.priority" id="prio" class="form-control">
             <option v-for="priority in priorities" :key="priority" :value="priority">
               {{ priority }}
             </option>
@@ -25,7 +25,7 @@
 
         <div class="form-group">
           <label for="state">State</label>
-          <select v-model="data.state" id="state" class="form-control">
+          <select v-model="data.status" id="state" class="form-control">
             <option v-for="state in states" :key="state" :value="state">
               {{ state }}
             </option>
@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import StoryService from '@/lib/application/services/storyService'
 import ProjectService from '@/lib/application/services/projectService'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
@@ -47,10 +47,8 @@ import { useRoute, useRouter } from 'vue-router'
 import UserService from '@/lib/application/services/userService'
 import StateEnum from '@/lib/domain/enums/state'
 import PriorityEnum from '@/lib/domain/enums/priority'
-import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
-import type { UserInterface } from '@/lib/domain/interfaces/userInterface'
+import type { StoryCreateDTO } from '@/backend/BaseApi'
 
-const data = ref({ name: '', desc: '', prio: PriorityEnum.low, date: '', state: StateEnum.todo })
 const priorities = Object.values(PriorityEnum)
 const states = Object.values(StateEnum)
 
@@ -60,20 +58,38 @@ const userService = new UserService()
 const router = useRouter()
 const route = useRoute()
 
-const projectId = Number(route.params.projectId)
+const projectId = String(route.params.projectId)
 
-const currentUser = await userService.GetCurrentUser()
-const currentProject = projectService.GetSelectProject() as ProjectInterface
+const data = ref<StoryCreateDTO>({
+  name: '',
+  description: '',
+  priority: PriorityEnum.low,
+  status: StateEnum.todo,
+  userId: '',
+  projectId: '',
+})
 
-const createStory = () => {
-  storyService.Create(
-    data.value.name,
-    data.value.desc,
-    data.value.prio,
-    currentProject,
-    data.value.state,
-    currentUser,
-  )
+onMounted(async () => {
+  fetchProjectData()
+})
+
+const fetchProjectData = async () => {
+  const currentUser = await userService.GetCurrentUser()
+  const currentProject = projectService.GetSelectProject()
+
+  data.value = {
+    name: '',
+    description: '',
+    priority: PriorityEnum.low,
+    status: StateEnum.todo,
+    userId: currentUser?.id ?? '',
+    projectId: currentProject?.id ?? '',
+  }
+}
+const createStory = async () => {
+  await storyService.CreateStory(data.value)
+  console.log('Story created successfully:', data.value)
+
   router.push({ name: 'StoryList', params: { id: projectId } })
 }
 </script>

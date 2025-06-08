@@ -1,90 +1,77 @@
-import type { StoryInterface } from '@/lib/domain/interfaces/storyInterface'
-import PriorityEnum from '@/lib/domain/enums/priority'
-import StateEnum from '@/lib/domain/enums/state'
-import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
-import Story from '@/lib/domain/models/story'
-import User from '@/lib/domain/models/user'
-import type { UserInterface } from '@/lib/domain/interfaces/userInterface'
-import type { UserDataDTO } from '@/backend/BaseApi'
+import { Backend } from '@/main'
+import type { StoryCreateDTO, StoryDataDTO } from '@/backend/BaseApi'
 
 class StoryService {
-  noOfStories: number
-
-  constructor() {
-    const storedNoOfStories = localStorage.getItem('noOfStories')
-    this.noOfStories = storedNoOfStories ? parseInt(storedNoOfStories, 10) : 0
-  }
-
-  GetNoOfStories(): number {
-    return this.noOfStories
-  }
-
-  GetStory(id: number, projId: number): StoryInterface | null {
-    const storyRaw = localStorage.getItem(`story${id}_proj${projId}`)
-    if (storyRaw) {
-      return JSON.parse(storyRaw)
-    } else return null
-  }
-
-  GetStoriesList(projectId: number): StoryInterface[] {
-    const result: StoryInterface[] = []
-
-    for (let i = 0; i < this.noOfStories; i++) {
-      const projRaw = localStorage.getItem(`story${i}_proj${projectId}`)
-      if (projRaw) {
-        const proj = JSON.parse(projRaw) as StoryInterface
-
-        result.push(proj)
-      }
-    }
-    return result
-  }
-
-  Create(
-    name: string,
-    desc: string,
-    prio: PriorityEnum,
-    project: ProjectInterface,
-    state: StateEnum,
-    user: UserDataDTO | undefined,
-  ): void {
-    const story = new Story(this.noOfStories, name, desc, prio, project, new Date(), state, user)
-
-    localStorage.setItem(`story${this.noOfStories}_proj${project.id}`, JSON.stringify(story))
-
-    this.noOfStories += 1
-
-    localStorage.setItem('noOfStories', this.noOfStories.toString())
-  }
-
-  Details(id: number, projectId: number): StoryInterface | null {
-    const projRaw = localStorage.getItem(`story${id}_proj${projectId}`)
-
-    if (projRaw) {
-      const proj = JSON.parse(projRaw) as StoryInterface
-      return proj
-    } else {
-      return null
+  async CreateStory(story: StoryCreateDTO): Promise<boolean | undefined> {
+    try {
+      await Backend.createStory(story)
+      return true
+    } catch (ex) {
+      console.log(ex)
     }
   }
 
-  Edit(
-    id: number,
-    name: string,
-    desc: string,
-    prio: PriorityEnum,
-    project: ProjectInterface,
-    createdAt: Date,
-    state: StateEnum,
-    user: UserDataDTO | undefined,
-  ): void {
-    const story = new Story(id, name, desc, prio, project, createdAt, state, user)
-
-    localStorage.setItem(`story${id}_proj${project.id}`, JSON.stringify(story))
+  async DeleteStory(id: string): Promise<boolean | undefined> {
+    try {
+      await Backend.deteleStory(id)
+      return true
+    } catch (ex) {
+      console.log(ex)
+    }
   }
 
-  Delete(id: number, projectId: number): void {
-    localStorage.removeItem(`story${id}_proj${projectId}`)
+  async GetStoryList(): Promise<StoryDataDTO[] | undefined> {
+    try {
+      const storyList = await Backend.getStoriesList()
+      return storyList
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+
+  async GetStoryListByProject(projectId: string): Promise<StoryDataDTO[] | undefined> {
+    try {
+      const storyList = await Backend.getStoriesListByProject(projectId)
+      return storyList
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+
+  async GetStory(id: string): Promise<StoryDataDTO | undefined> {
+    try {
+      const story = await Backend.getStory(id)
+      return story
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+
+  async UpdateStory(id: string, story: StoryDataDTO): Promise<boolean | undefined> {
+    try {
+      await Backend.updateStory(id, story)
+      return true
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+
+  async UpdateStoryStatus(id: string, status: string): Promise<boolean | undefined> {
+    try {
+      await Backend.updateState(id, status)
+      return true
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+
+  async UpdateStoryPriority(id: string, priority: string): Promise<boolean | undefined> {
+    try {
+      await Backend.updatePriority(id, priority)
+      return true
+    } catch (ex) {
+      console.log(ex)
+    }
   }
 }
 

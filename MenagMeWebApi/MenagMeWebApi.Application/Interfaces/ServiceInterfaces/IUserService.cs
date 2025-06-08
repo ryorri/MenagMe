@@ -13,5 +13,9 @@ namespace MenagMeWebApi.Application.Interfaces.ServiceInterfaces
         Task<UserDataDTO?> GetUser(string id);
         Task<UserDataDTO?> LogIn(string username, string password);
         Task<List<UserDataDTO>> GetAllUsers();
+        Task<List<UserDataDTO>> GetUsersByRole(string role);
+        Task<bool> CheckRefreshToken (string userId, string refreshToken);
+        Task<bool> AssignNewRefreshToken(string userId, string refreshToken);
+        Task<string> GetRefreshTokenFromDB(string userId);
     }
 }

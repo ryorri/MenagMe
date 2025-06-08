@@ -25,6 +25,1148 @@ export class Client {
    * @param body (optional)
    * @return OK
    */
+  createProject(body: ProjectCreateDTO | undefined): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Project/create-project'
+    url_ = url_.replace(/[?&]$/, '')
+
+    const content_ = JSON.stringify(body)
+
+    let options_: RequestInit = {
+      body: content_,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processCreateProject(_response)
+    })
+  }
+
+  protected processCreateProject(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @param projectId (optional)
+   * @return OK
+   */
+  deteleProject(projectId: string | undefined): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Project/detele-project?'
+    if (projectId === null) throw new Error("The parameter 'projectId' cannot be null.")
+    else if (projectId !== undefined)
+      url_ += 'projectId=' + encodeURIComponent('' + projectId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'DELETE',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processDeteleProject(_response)
+    })
+  }
+
+  protected processDeteleProject(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @return OK
+   */
+  getProjectList(): Promise<ProjectDataDTO[]> {
+    let url_ = this.baseUrl + '/api/Project/get-project-list'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'GET',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processGetProjectList(_response)
+    })
+  }
+
+  protected processGetProjectList(response: Response): Promise<ProjectDataDTO[]> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as ProjectDataDTO[])
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<ProjectDataDTO[]>(null as any)
+  }
+
+  /**
+   * @param projectId (optional)
+   * @return OK
+   */
+  getProject(projectId: string | undefined): Promise<ProjectDataDTO> {
+    let url_ = this.baseUrl + '/api/Project/get-project?'
+    if (projectId === null) throw new Error("The parameter 'projectId' cannot be null.")
+    else if (projectId !== undefined)
+      url_ += 'projectId=' + encodeURIComponent('' + projectId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'GET',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processGetProject(_response)
+    })
+  }
+
+  protected processGetProject(response: Response): Promise<ProjectDataDTO> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as ProjectDataDTO)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<ProjectDataDTO>(null as any)
+  }
+
+  /**
+   * @param projectId (optional)
+   * @param body (optional)
+   * @return OK
+   */
+  updateProject(
+    projectId: string | undefined,
+    body: ProjectCreateDTO | undefined,
+  ): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Project/update-project?'
+    if (projectId === null) throw new Error("The parameter 'projectId' cannot be null.")
+    else if (projectId !== undefined)
+      url_ += 'projectId=' + encodeURIComponent('' + projectId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    const content_ = JSON.stringify(body)
+
+    let options_: RequestInit = {
+      body: content_,
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processUpdateProject(_response)
+    })
+  }
+
+  protected processUpdateProject(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @param body (optional)
+   * @return OK
+   */
+  createStory(body: StoryCreateDTO | undefined): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Story/create-story'
+    url_ = url_.replace(/[?&]$/, '')
+
+    const content_ = JSON.stringify(body)
+
+    let options_: RequestInit = {
+      body: content_,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processCreateStory(_response)
+    })
+  }
+
+  protected processCreateStory(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @param storyId (optional)
+   * @return OK
+   */
+  deteleStory(storyId: string | undefined): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Story/detele-story?'
+    if (storyId === null) throw new Error("The parameter 'storyId' cannot be null.")
+    else if (storyId !== undefined) url_ += 'storyId=' + encodeURIComponent('' + storyId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'DELETE',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processDeteleStory(_response)
+    })
+  }
+
+  protected processDeteleStory(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @return OK
+   */
+  getStoriesList(): Promise<StoryDataDTO[]> {
+    let url_ = this.baseUrl + '/api/Story/get-stories-list'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'GET',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processGetStoriesList(_response)
+    })
+  }
+
+  protected processGetStoriesList(response: Response): Promise<StoryDataDTO[]> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as StoryDataDTO[])
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<StoryDataDTO[]>(null as any)
+  }
+
+  /**
+   * @param projectId (optional)
+   * @return OK
+   */
+  getStoriesListByProject(projectId: string | undefined): Promise<StoryDataDTO[]> {
+    let url_ = this.baseUrl + '/api/Story/get-stories-list-by-project?'
+    if (projectId === null) throw new Error("The parameter 'projectId' cannot be null.")
+    else if (projectId !== undefined)
+      url_ += 'projectId=' + encodeURIComponent('' + projectId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'GET',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processGetStoriesListByProject(_response)
+    })
+  }
+
+  protected processGetStoriesListByProject(response: Response): Promise<StoryDataDTO[]> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as StoryDataDTO[])
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<StoryDataDTO[]>(null as any)
+  }
+
+  /**
+   * @param storyId (optional)
+   * @return OK
+   */
+  getStory(storyId: string | undefined): Promise<StoryDataDTO> {
+    let url_ = this.baseUrl + '/api/Story/get-story?'
+    if (storyId === null) throw new Error("The parameter 'storyId' cannot be null.")
+    else if (storyId !== undefined) url_ += 'storyId=' + encodeURIComponent('' + storyId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'GET',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processGetStory(_response)
+    })
+  }
+
+  protected processGetStory(response: Response): Promise<StoryDataDTO> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as StoryDataDTO)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<StoryDataDTO>(null as any)
+  }
+
+  /**
+   * @param storyId (optional)
+   * @param body (optional)
+   * @return OK
+   */
+  updateStory(storyId: string | undefined, body: StoryCreateDTO | undefined): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Story/update-story?'
+    if (storyId === null) throw new Error("The parameter 'storyId' cannot be null.")
+    else if (storyId !== undefined) url_ += 'storyId=' + encodeURIComponent('' + storyId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    const content_ = JSON.stringify(body)
+
+    let options_: RequestInit = {
+      body: content_,
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processUpdateStory(_response)
+    })
+  }
+
+  protected processUpdateStory(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @param storyId (optional)
+   * @param newPriority (optional)
+   * @return OK
+   */
+  updatePriority(storyId: string | undefined, newPriority: string | undefined): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Story/update-priority?'
+    if (storyId === null) throw new Error("The parameter 'storyId' cannot be null.")
+    else if (storyId !== undefined) url_ += 'storyId=' + encodeURIComponent('' + storyId) + '&'
+    if (newPriority === null) throw new Error("The parameter 'newPriority' cannot be null.")
+    else if (newPriority !== undefined)
+      url_ += 'newPriority=' + encodeURIComponent('' + newPriority) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'PUT',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processUpdatePriority(_response)
+    })
+  }
+
+  protected processUpdatePriority(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @param storyId (optional)
+   * @param newState (optional)
+   * @return OK
+   */
+  updateState(storyId: string | undefined, newState: string | undefined): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Story/update-state?'
+    if (storyId === null) throw new Error("The parameter 'storyId' cannot be null.")
+    else if (storyId !== undefined) url_ += 'storyId=' + encodeURIComponent('' + storyId) + '&'
+    if (newState === null) throw new Error("The parameter 'newState' cannot be null.")
+    else if (newState !== undefined) url_ += 'newState=' + encodeURIComponent('' + newState) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'PUT',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processUpdateState(_response)
+    })
+  }
+
+  protected processUpdateState(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @param body (optional)
+   * @return OK
+   */
+  createTask(body: TasksCreateDTO | undefined): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Tasks/create-task'
+    url_ = url_.replace(/[?&]$/, '')
+
+    const content_ = JSON.stringify(body)
+
+    let options_: RequestInit = {
+      body: content_,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processCreateTask(_response)
+    })
+  }
+
+  protected processCreateTask(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @param taskId (optional)
+   * @return OK
+   */
+  deteleTask(taskId: string | undefined): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Tasks/detele-task?'
+    if (taskId === null) throw new Error("The parameter 'taskId' cannot be null.")
+    else if (taskId !== undefined) url_ += 'taskId=' + encodeURIComponent('' + taskId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'DELETE',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processDeteleTask(_response)
+    })
+  }
+
+  protected processDeteleTask(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @return OK
+   */
+  getTasksList(): Promise<TasksDataDTO[]> {
+    let url_ = this.baseUrl + '/api/Tasks/get-tasks-list'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'GET',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processGetTasksList(_response)
+    })
+  }
+
+  protected processGetTasksList(response: Response): Promise<TasksDataDTO[]> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as TasksDataDTO[])
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<TasksDataDTO[]>(null as any)
+  }
+
+  /**
+   * @param storyId (optional)
+   * @return OK
+   */
+  getTasksListByStory(storyId: string | undefined): Promise<TasksDataDTO[]> {
+    let url_ = this.baseUrl + '/api/Tasks/get-tasks-list-by-story?'
+    if (storyId === null) throw new Error("The parameter 'storyId' cannot be null.")
+    else if (storyId !== undefined) url_ += 'storyId=' + encodeURIComponent('' + storyId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'GET',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processGetTasksListByStory(_response)
+    })
+  }
+
+  protected processGetTasksListByStory(response: Response): Promise<TasksDataDTO[]> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as TasksDataDTO[])
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<TasksDataDTO[]>(null as any)
+  }
+
+  /**
+   * @param taskId (optional)
+   * @return OK
+   */
+  getTask(taskId: string | undefined): Promise<TasksDataDTO> {
+    let url_ = this.baseUrl + '/api/Tasks/get-task?'
+    if (taskId === null) throw new Error("The parameter 'taskId' cannot be null.")
+    else if (taskId !== undefined) url_ += 'taskId=' + encodeURIComponent('' + taskId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'GET',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processGetTask(_response)
+    })
+  }
+
+  protected processGetTask(response: Response): Promise<TasksDataDTO> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as TasksDataDTO)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<TasksDataDTO>(null as any)
+  }
+
+  /**
+   * @param taskId (optional)
+   * @param body (optional)
+   * @return OK
+   */
+  updateTask(taskId: string | undefined, body: TasksCreateDTO | undefined): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Tasks/update-task?'
+    if (taskId === null) throw new Error("The parameter 'taskId' cannot be null.")
+    else if (taskId !== undefined) url_ += 'taskId=' + encodeURIComponent('' + taskId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    const content_ = JSON.stringify(body)
+
+    let options_: RequestInit = {
+      body: content_,
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processUpdateTask(_response)
+    })
+  }
+
+  protected processUpdateTask(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @param taskId (optional)
+   * @param newPriority (optional)
+   * @return OK
+   */
+  updateTaskPriority(
+    taskId: string | undefined,
+    newPriority: string | undefined,
+  ): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Tasks/update-task-priority?'
+    if (taskId === null) throw new Error("The parameter 'taskId' cannot be null.")
+    else if (taskId !== undefined) url_ += 'taskId=' + encodeURIComponent('' + taskId) + '&'
+    if (newPriority === null) throw new Error("The parameter 'newPriority' cannot be null.")
+    else if (newPriority !== undefined)
+      url_ += 'newPriority=' + encodeURIComponent('' + newPriority) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'PUT',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processUpdateTaskPriority(_response)
+    })
+  }
+
+  protected processUpdateTaskPriority(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @param taskId (optional)
+   * @param newState (optional)
+   * @return OK
+   */
+  updateTaskStateAndDates(
+    taskId: string | undefined,
+    newState: string | undefined,
+  ): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Tasks/update-task-state-and-dates?'
+    if (taskId === null) throw new Error("The parameter 'taskId' cannot be null.")
+    else if (taskId !== undefined) url_ += 'taskId=' + encodeURIComponent('' + taskId) + '&'
+    if (newState === null) throw new Error("The parameter 'newState' cannot be null.")
+    else if (newState !== undefined) url_ += 'newState=' + encodeURIComponent('' + newState) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'PUT',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processUpdateTaskStateAndDates(_response)
+    })
+  }
+
+  protected processUpdateTaskStateAndDates(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @param taskId (optional)
+   * @param userId (optional)
+   * @return OK
+   */
+  assignUserToTask(taskId: string | undefined, userId: string | undefined): Promise<boolean> {
+    let url_ = this.baseUrl + '/api/Tasks/assign-user-to-task?'
+    if (taskId === null) throw new Error("The parameter 'taskId' cannot be null.")
+    else if (taskId !== undefined) url_ += 'taskId=' + encodeURIComponent('' + taskId) + '&'
+    if (userId === null) throw new Error("The parameter 'userId' cannot be null.")
+    else if (userId !== undefined) url_ += 'userId=' + encodeURIComponent('' + userId) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'PUT',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processAssignUserToTask(_response)
+    })
+  }
+
+  protected processAssignUserToTask(response: Response): Promise<boolean> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as boolean)
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<boolean>(null as any)
+  }
+
+  /**
+   * @param body (optional)
+   * @return OK
+   */
   register(body: UserCreateDTO | undefined): Promise<UserCreateDTO> {
     let url_ = this.baseUrl + '/api/User/register'
     url_ = url_.replace(/[?&]$/, '')
@@ -174,6 +1316,56 @@ export class Client {
   }
 
   /**
+   * @param role (optional)
+   * @return OK
+   */
+  getUserListByRole(role: string | undefined): Promise<UserDataDTO[]> {
+    let url_ = this.baseUrl + '/api/User/get-user-list-by-role?'
+    if (role === null) throw new Error("The parameter 'role' cannot be null.")
+    else if (role !== undefined) url_ += 'role=' + encodeURIComponent('' + role) + '&'
+    url_ = url_.replace(/[?&]$/, '')
+
+    let options_: RequestInit = {
+      method: 'GET',
+      headers: {
+        Accept: 'text/plain',
+      },
+    }
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processGetUserListByRole(_response)
+    })
+  }
+
+  protected processGetUserListByRole(response: Response): Promise<UserDataDTO[]> {
+    const status = response.status
+    let _headers: any = {}
+    if (response.headers && response.headers.forEach) {
+      response.headers.forEach((v: any, k: any) => (_headers[k] = v))
+    }
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null
+        result200 =
+          _responseText === ''
+            ? null
+            : (JSON.parse(_responseText, this.jsonParseReviver) as UserDataDTO[])
+        return result200
+      })
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException(
+          'An unexpected server error occurred.',
+          status,
+          _responseText,
+          _headers,
+        )
+      })
+    }
+    return Promise.resolve<UserDataDTO[]>(null as any)
+  }
+
+  /**
    * @param id (optional)
    * @return OK
    */
@@ -225,12 +1417,16 @@ export class Client {
 
   /**
    * @param id (optional)
+   * @param refreshToken (optional)
    * @return OK
    */
-  getRefreshToken(id: string | undefined): Promise<string> {
+  getRefreshToken(id: string | undefined, refreshToken: string | undefined): Promise<string> {
     let url_ = this.baseUrl + '/api/User/get-refresh-token?'
     if (id === null) throw new Error("The parameter 'id' cannot be null.")
     else if (id !== undefined) url_ += 'id=' + encodeURIComponent('' + id) + '&'
+    if (refreshToken === null) throw new Error("The parameter 'refreshToken' cannot be null.")
+    else if (refreshToken !== undefined)
+      url_ += 'refreshToken=' + encodeURIComponent('' + refreshToken) + '&'
     url_ = url_.replace(/[?&]$/, '')
 
     let options_: RequestInit = {
@@ -272,6 +1468,62 @@ export class Client {
   }
 }
 
+export interface ProjectCreateDTO {
+  name: string | undefined
+  description?: string | undefined
+}
+
+export interface ProjectDataDTO {
+  id: string | undefined
+  name: string | undefined
+  description?: string | undefined
+}
+
+export interface StoryCreateDTO {
+  name: string | undefined
+  description?: string | undefined
+  priority: string | undefined
+  status: string | undefined
+  userId: string | undefined
+  projectId: string | undefined
+}
+
+export interface StoryDataDTO {
+  id: string | undefined
+  name: string | undefined
+  description?: string | undefined
+  priority: string | undefined
+  status: string | undefined
+  createdAt: Date
+  userId: string | undefined
+  projectId: string | undefined
+}
+
+export interface TasksCreateDTO {
+  name: string | undefined
+  description?: string | undefined
+  priority: string | undefined
+  status: string | undefined
+  userId: string | undefined
+  storyId: string | undefined
+  estimatedTime: Date
+}
+
+export interface TasksDataDTO {
+  id: string | undefined
+  name: string | undefined
+  description?: string | undefined
+  priority: string | undefined
+  status: string | undefined
+  createdAt: Date
+  userId: string | undefined
+  storyId: string | undefined
+  estimatedTime: Date
+  startDate?: Date
+  endDate?: Date
+  assignedUserId?: string | undefined
+}
+
 export interface UserCreateDTO {
   userName: string | undefined
   name: string | undefined
@@ -279,7 +1531,6 @@ export interface UserCreateDTO {
   email: string | undefined
   password: string | undefined
   role: string | undefined
-  createdAt?: Date
 }
 
 export interface UserDataDTO {

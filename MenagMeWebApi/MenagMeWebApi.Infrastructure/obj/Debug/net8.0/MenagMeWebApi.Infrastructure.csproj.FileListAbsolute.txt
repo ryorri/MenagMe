@@ -1,5 +1,4 @@
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Infrastructure\bin\Debug\net8.0\MenagMeWebApi.Infrastructure.deps.json
-G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Infrastructure\bin\Debug\net8.0\MenagMeWebApi.Infrastructure.runtimeconfig.json
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Infrastructure\bin\Debug\net8.0\MenagMeWebApi.Infrastructure.dll
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Infrastructure\bin\Debug\net8.0\MenagMeWebApi.Infrastructure.pdb
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Infrastructure\bin\Debug\net8.0\MenagMeWebApi.Application.dll
@@ -16,5 +15,4 @@ G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\Mena
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Infrastructure\obj\Debug\net8.0\MenagMeWebApi.Infrastructure.dll
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Infrastructure\obj\Debug\net8.0\refint\MenagMeWebApi.Infrastructure.dll
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Infrastructure\obj\Debug\net8.0\MenagMeWebApi.Infrastructure.pdb
-G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Infrastructure\obj\Debug\net8.0\MenagMeWebApi.Infrastructure.genruntimeconfig.cache
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Infrastructure\obj\Debug\net8.0\ref\MenagMeWebApi.Infrastructure.dll

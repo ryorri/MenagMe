@@ -1,4 +1,5 @@
-﻿using MenagMeWebApi.Application.Interfaces.ISeederInterfaces;
+﻿using AspNetCore.Identity.Mongo.Model;
+using MenagMeWebApi.Application.Interfaces.ISeederInterfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,30 @@ namespace MenagMeWebApi.Infrastructure.Seeders
 {
     public class RoleSeeder : IRoleSeeder
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
-        
-        public RoleSeeder(RoleManager<IdentityRole> roleManager)
+        private readonly RoleManager<MongoRole> _roleManager;
+
+        public RoleSeeder(RoleManager<MongoRole> roleManager)
         {
             _roleManager = roleManager;
         }
+
         public async Task SeedRolesAsync()
         {
-            string[] roles = { "Admin", "Developer", "DevOps" };
+            var roles = new[] { "Admin", "Developer", "DevOps" };
 
             foreach (var role in roles)
             {
-                if (!await _roleManager.RoleExistsAsync(role))
+                var exists = await _roleManager.RoleExistsAsync(role);
+                if (!exists)
                 {
-                    var identityRole = new IdentityRole
+                    var result = await _roleManager.CreateAsync(new MongoRole(role));
+                    if (!result.Succeeded)
                     {
-                        Name = role,
-                        NormalizedName = role.ToUpper()
-                    };
-                    await _roleManager.CreateAsync(identityRole);
+                        var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                        throw new Exception($"{role}: {errors}");
+                    }
                 }
             }
         }
     }
-
 }

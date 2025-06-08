@@ -1,6 +1,7 @@
 <template>
   <mainLayout>
-    <div class="project-details">
+    <div v-if="!loading">Loading...</div>
+    <div v-else class="project-details">
       <form @submit.prevent="editProject" class="form-container">
         <div class="form-group">
           <label for="name">Name:</label>
@@ -9,7 +10,12 @@
 
         <div class="form-group">
           <label for="desc">Description:</label>
-          <textarea id="desc" v-model="editedProject.desc" required class="form-input"></textarea>
+          <textarea
+            id="desc"
+            v-model="editedProject.description"
+            required
+            class="form-input"
+          ></textarea>
         </div>
 
         <button type="submit" class="submit-btn">Edit project</button>
@@ -23,30 +29,39 @@ import ProjectService from '@/lib/application/services/projectService'
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import mainLayout from '../../layouts/mainLayout.vue'
+import type { ProjectDataDTO } from '@/backend/BaseApi'
 
 const route = useRoute()
 const router = useRouter()
 
-const projectId = Number(route.params.id)
+const projectId = String(route.params.id)
 
 const projectService = new ProjectService()
 
-const project = projectService.Details(projectId)
-
-const editedProject = ref({ name: '', desc: '' })
+const editedProject = ref()
+const loading = ref(false)
 
 onMounted(() => {
-  if (project) {
-    editedProject.value = {
-      name: project.name,
-      desc: project.desc,
-    }
-  }
+  fetchProjectDetails()
+  loading.value = true
 })
 
 const editProject = () => {
-  projectService.Edit(projectId, editedProject.value.name, editedProject.value.desc)
-  router.push({ name: 'ProjectList' })
+  if (editedProject.value) {
+    projectService.UpdateProject(projectId, editedProject.value)
+    router.push({ name: 'ProjectList' })
+  }
+}
+
+const fetchProjectDetails = async () => {
+  const projectDetails = await projectService.GetProject(projectId)
+  if (projectDetails) {
+    editedProject.value = {
+      id: projectDetails.id,
+      name: projectDetails.name,
+      description: projectDetails.description,
+    }
+  }
 }
 </script>
 

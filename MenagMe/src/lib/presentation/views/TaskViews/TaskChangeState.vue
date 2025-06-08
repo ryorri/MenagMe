@@ -1,16 +1,21 @@
 <template>
   <mainLayout>
-    <div class="task-details">
+    <div v-if="task" class="task-details">
       <h2 class="task-title">{{ task?.name }}</h2>
-      <p class="task-desc">{{ task?.desc }}</p>
+      <p class="task-desc">{{ task?.description }}</p>
 
       <div class="task-info">
-        <p><strong>Priority:</strong> {{ task?.prio }}</p>
-        <p><strong>State:</strong> {{ task?.state }}</p>
-        <p><strong>Created At:</strong> {{ task?.createdAt }}</p>
-        <p><strong>Assigned user :</strong> {{ task?.signedUser?.name }}</p>
+        <p><strong>Priority:</strong> {{ task.priority }}</p>
+        <p><strong>State:</strong> {{ task.status }}</p>
+        <p><strong>Created At:</strong> {{ formatDate(task.createdAt) }}</p>
+        <p>
+          <strong v-if="user">Assigned user :</strong> {{ user?.name }} {{ user?.surname }} ({{
+            user?.role
+          }})
+        </p>
       </div>
     </div>
+    <div v-else>Loading task...</div>
 
     <form @submit.prevent="changeState">
       <div class="form-group">
@@ -31,25 +36,36 @@ import { useRoute, useRouter } from 'vue-router'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
 import TaskService from '@/lib/application/services/taskService'
 import StateEnum from '@/lib/domain/enums/state'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import UserService from '@/lib/application/services/userService'
+import { formatDate } from '@/lib/application/extensions/dateFormatter'
 
 const router = useRouter()
 const route = useRoute()
 const taskService = new TaskService()
+const userService = new UserService()
 
-const projectId = Number(route.params.projectId)
-const storyId = Number(route.params.storyId)
-const taskId = Number(route.params.taskId)
+const projectId = String(route.params.projectId)
+const storyId = String(route.params.storyId)
+const taskId = String(route.params.taskId)
 
-const task = taskService.Details(taskId, storyId)
+const task = ref()
+const user = ref()
 const states = Object.values(StateEnum)
+
+onMounted(async () => {
+  task.value = await taskService.GetTask(taskId)
+  user.value = await userService.GetUser(task.value.assignedUserId)
+  console.log('Task:', user.value)
+})
 
 const data = ref({
   state: StateEnum.todo,
 })
 
-const changeState = () => {
-  taskService.ChangeState(task!, data.value.state)
+const changeState = async () => {
+  await taskService.UpdateTaskStatus(taskId, data.value.state)
+
   router.push({ name: 'StoryList', params: { projectId: projectId } })
 }
 </script>

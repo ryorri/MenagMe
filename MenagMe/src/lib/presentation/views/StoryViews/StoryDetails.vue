@@ -1,15 +1,18 @@
 <template>
   <mainLayout>
-    <div class="story-details">
+    <div v-if="!loading">
+      <p>Loading...</p>
+    </div>
+    <div v-else class="story-details">
       <h2 class="story-title">{{ story?.name }}</h2>
-      <p class="story-desc">{{ story?.desc }}</p>
+      <p class="story-desc">{{ story?.description }}</p>
 
       <div class="story-info">
-        <p><strong>Priority:</strong> {{ story?.prio }}</p>
-        <p><strong>State:</strong> {{ story?.state }}</p>
+        <p><strong>Priority:</strong> {{ story?.priority }}</p>
+        <p><strong>State:</strong> {{ story?.status }}</p>
         <p><strong>Created At:</strong> {{ formatDate(story?.createdAt) }}</p>
-        <p><strong>Project:</strong> {{ story?.project.name }}</p>
-        <p><strong>Author:</strong> {{ story?.user.name }}</p>
+        <p><strong>Project:</strong> {{ project?.name }}</p>
+        <p><strong>Author:</strong> {{ user?.name }} {{ user?.surname }}</p>
       </div>
     </div>
   </mainLayout>
@@ -20,14 +23,43 @@ import { useRoute } from 'vue-router'
 import StoryService from '@/lib/application/services/storyService'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
 import { formatDate } from '@/lib/application/extensions/dateFormatter'
+import type { ProjectDataDTO, StoryDataDTO, UserDataDTO } from '@/backend/BaseApi'
+import { onMounted, ref } from 'vue'
+import ProjectService from '@/lib/application/services/projectService'
+import UserService from '@/lib/application/services/userService'
 
 const route = useRoute()
 const storyService = new StoryService()
+const projectService = new ProjectService()
+const userService = new UserService()
 
-const storyId = Number(route.params.storyId)
-const projectId = Number(route.params.projectId)
+const storyId = String(route.params.storyId)
+const projectId = String(route.params.projectId)
 
-const story = storyService.Details(storyId, projectId)
+const story = ref<StoryDataDTO>()
+const project = ref<ProjectDataDTO>()
+const user = ref<UserDataDTO | undefined>()
+const loading = ref(false)
+
+onMounted(async () => {
+  await fetchStoryData()
+  await fetchProjectData()
+  await fetchUserData()
+  loading.value = true
+})
+
+const fetchStoryData = async () => {
+  story.value = await storyService.GetStory(storyId)
+}
+const fetchProjectData = async () => {
+  project.value = await projectService.GetProject(projectId)
+}
+const fetchUserData = async () => {
+  const userId = story.value!.userId
+  if (userId) {
+    user.value = await userService.GetUser(userId)
+  }
+}
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 export function formatDate(date: Date | string | undefined | null): string {
-  if (!date) return ''
+  if (!date || date === '0001-01-01T00:00:00') return ''
   const dateObj = typeof date === 'string' ? new Date(date) : date
 
   const day = String(dateObj.getDate()).padStart(2, '0')

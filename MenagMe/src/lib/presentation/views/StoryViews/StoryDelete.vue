@@ -2,7 +2,7 @@
   <mainLayout>
     <div class="story-details">
       <h2 class="story-name">{{ story?.name }}</h2>
-      <p class="story-description">{{ story?.desc }}</p>
+      <p class="story-description">{{ story?.description }}</p>
 
       <div class="confirmation-box">
         <h3>Are you sure?</h3>
@@ -18,19 +18,29 @@
 import StoryService from '@/lib/application/services/storyService'
 import { useRoute, useRouter } from 'vue-router'
 import mainLayout from '../../layouts/mainLayout.vue'
+import type { StoryDataDTO } from '@/backend/BaseApi'
+import { ref, onMounted } from 'vue'
 
 const route = useRoute()
 const router = useRouter()
 
-const storyId = Number(route.params.storyId)
-const projectId = Number(route.params.projectId)
+const storyId = String(route.params.storyId)
 
 const storyService = new StoryService()
 
-const story = storyService.Details(storyId, projectId)
+const story = ref<StoryDataDTO>()
 
-const deleteStory = (id: number) => {
-  storyService.Delete(id, projectId)
+onMounted(async () => {
+  await fetchStoryData()
+})
+
+const fetchStoryData = async () => {
+  story.value = await storyService.GetStory(storyId)
+}
+
+const deleteStory = async (id: string) => {
+  await storyService.DeleteStory(id)
+  console.log(`Story with ID ${id} deleted successfully.`)
   router.push({ name: 'StoryList' })
 }
 </script>

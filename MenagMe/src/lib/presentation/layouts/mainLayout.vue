@@ -24,7 +24,8 @@
         <select @change="selectProject">
           <option selected v-if="selectedProject">{{ selectedProject.name }}</option>
           <option :value="'null'"></option>
-          <option v-for="project in projectList" :key="project.id" :value="project.id">
+          <option v-if="!projectList" :value="'null'"></option>
+          <option v-else v-for="project in projectList" :key="project.id" :value="project.id">
             {{ project.name }}
           </option>
         </select>
@@ -79,21 +80,19 @@
 </template>
 
 <script setup lang="ts">
-import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
-
 import ProjectService from '@/lib/application/services/projectService'
 import UserService from '@/lib/application/services/userService'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { Backend } from '@/main'
 import { useThemeStore } from '@/lib/application/stores/theme'
+import type { ProjectDataDTO } from '@/backend/BaseApi'
 
 const router = useRouter()
 
 const userService = new UserService()
 const projectService = new ProjectService()
 const user = ref()
-const projectList = ref<ProjectInterface[]>([])
+const projectList = ref<ProjectDataDTO[]>([])
 const listInterval = ref()
 const selectedProjectInterval = ref()
 const selectedProject = ref()
@@ -123,8 +122,11 @@ const fetchSelectedProject = () => {
   selectedProject.value = projectService.GetSelectProject()
 }
 
-const fetchProjectList = () => {
-  projectList.value = projectService.GetProjectsList()
+const fetchProjectList = async () => {
+  const list = await projectService.GetProjectList()
+  if (list) {
+    projectList.value = list
+  }
 }
 
 const selectProject = (event: Event) => {
@@ -134,7 +136,7 @@ const selectProject = (event: Event) => {
   if (target.value != 'null') {
     selectedProjectId.value = target.value
 
-    projectService.SetSelectProject(Number(selectedProjectId.value))
+    projectService.SetSelectProject(selectedProjectId.value)
   } else {
     selectedProjectId.value = null
     projectService.SetSelectProject(selectedProjectId.value)

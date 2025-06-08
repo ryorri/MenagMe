@@ -1,4 +1,6 @@
-﻿using MenagMeWebApi.Application.Interfaces.ISeederInterfaces;
+﻿using AspNetCore.Identity.Mongo;
+using AspNetCore.Identity.Mongo.Model;
+using MenagMeWebApi.Application.Interfaces.ISeederInterfaces;
 using MenagMeWebApi.Application.Interfaces.ServiceInterfaces;
 using MenagMeWebApi.Domain.Entities;
 using MenagMeWebApi.Infrastructure.Data;
@@ -6,12 +8,9 @@ using MenagMeWebApi.Infrastructure.Extensions;
 using MenagMeWebApi.Infrastructure.Seeders;
 using MenagMeWebApi.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System.Runtime.ConstrainedExecution;
 using System.Security.Claims;
 using System.Text;
 
@@ -22,25 +21,41 @@ namespace MenagMeWebApi.Infrastructure
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration config)
         {
             #region Scopes
-            services.AddScoped<DatabaseInitialiser>();
-            services.AddScoped<ServiceExtension>();
-            services.AddScoped<IRoleSeeder, RoleSeeder>();
-            services.AddScoped<IUserSeeder, UserSeeder>();
 
+            services.AddSingleton<MenagMeMongoDbContext>();
+            services.AddScoped<ServiceExtension>();
+            services.AddTransient<IUserSeeder, UserSeeder>();
+            services.AddTransient<IRoleSeeder, RoleSeeder>();
+            services.AddScoped<DatabaseInitialiser>();
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserService, UserService>();
-            
+            services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<IStoryService, StoryService>();
+            services.AddScoped<ITasksService, TasksService>();
+
 
             #endregion
 
 
-            services.AddDbContext<MenagMeDbContext>(options =>
-                options.UseSqlite(config.GetConnectionString("DefaultConnection")));
+            services.Configure<MongoDbSettings>(config.GetSection("MongoDbSettings"));
 
-            services.AddIdentity<User, IdentityRole>()
-            .AddEntityFrameworkStores<MenagMeDbContext>()
-            .AddDefaultTokenProviders();
+
+            services.AddIdentityMongoDbProvider<User, MongoRole>(identityOptions =>
+            {
+                identityOptions.Password.RequireDigit = true;
+                identityOptions.Password.RequiredLength = 6;
+                identityOptions.Password.RequireNonAlphanumeric = false;
+                identityOptions.Password.RequireUppercase = true;
+                identityOptions.Password.RequireLowercase = true;
+
+                identityOptions.User.RequireUniqueEmail = true;
+            },
+            mongoIdentityOptions =>
+            {
+                var mongoSettings = config.GetSection("MongoDbSettings").Get<MongoDbSettings>();
+                mongoIdentityOptions.ConnectionString = $"{mongoSettings!.ConnectionString}/{mongoSettings.DatabaseName}";
+            });
 
             services.AddAuthentication(op =>
             {

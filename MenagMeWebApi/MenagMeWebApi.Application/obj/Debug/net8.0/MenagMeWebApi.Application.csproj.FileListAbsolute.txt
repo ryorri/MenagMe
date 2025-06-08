@@ -1,5 +1,4 @@
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Application\bin\Debug\net8.0\MenagMeWebApi.Application.deps.json
-G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Application\bin\Debug\net8.0\MenagMeWebApi.Application.runtimeconfig.json
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Application\bin\Debug\net8.0\MenagMeWebApi.Application.dll
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Application\bin\Debug\net8.0\MenagMeWebApi.Application.pdb
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Application\bin\Debug\net8.0\MenagMeWebApi.Domain.dll
@@ -14,5 +13,4 @@ G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\Mena
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Application\obj\Debug\net8.0\MenagMeWebApi.Application.dll
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Application\obj\Debug\net8.0\refint\MenagMeWebApi.Application.dll
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Application\obj\Debug\net8.0\MenagMeWebApi.Application.pdb
-G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Application\obj\Debug\net8.0\MenagMeWebApi.Application.genruntimeconfig.cache
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Application\obj\Debug\net8.0\ref\MenagMeWebApi.Application.dll

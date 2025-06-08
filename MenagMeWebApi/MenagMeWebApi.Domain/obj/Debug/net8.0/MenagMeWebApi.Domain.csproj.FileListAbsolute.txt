@@ -1,5 +1,4 @@
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Domain\bin\Debug\net8.0\MenagMeWebApi.Domain.deps.json
-G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Domain\bin\Debug\net8.0\MenagMeWebApi.Domain.runtimeconfig.json
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Domain\bin\Debug\net8.0\MenagMeWebApi.Domain.dll
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Domain\bin\Debug\net8.0\MenagMeWebApi.Domain.pdb
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Domain\obj\Debug\net8.0\MenagMeWebApi.Domain.csproj.AssemblyReference.cache
@@ -11,5 +10,4 @@ G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\Mena
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Domain\obj\Debug\net8.0\MenagMeWebApi.Domain.dll
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Domain\obj\Debug\net8.0\refint\MenagMeWebApi.Domain.dll
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Domain\obj\Debug\net8.0\MenagMeWebApi.Domain.pdb
-G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Domain\obj\Debug\net8.0\MenagMeWebApi.Domain.genruntimeconfig.cache
 G:\Studia\Semestr VI\Programowanie aplikacji webowych\Projekt\MenagMeWebApi\MenagMeWebApi.Domain\obj\Debug\net8.0\ref\MenagMeWebApi.Domain.dll

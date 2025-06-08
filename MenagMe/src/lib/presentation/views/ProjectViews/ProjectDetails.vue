@@ -2,7 +2,7 @@
   <mainLayout>
     <div class="project-detail-container">
       <h2 class="project-title">{{ project?.name }}</h2>
-      <p class="project-description">{{ project?.desc }}</p>
+      <p class="project-description">{{ project?.description }}</p>
     </div>
   </mainLayout>
 </template>
@@ -11,14 +11,23 @@
 import ProjectService from '@/lib/application/services/projectService'
 import { useRoute } from 'vue-router'
 import mainLayout from '../../layouts/mainLayout.vue'
+import { onMounted, ref } from 'vue'
+import type { ProjectDataDTO } from '@/backend/BaseApi'
 
 const route = useRoute()
 
-const projectId = Number(route.params.id)
+const projectId = String(route.params.id)
 
 const projectService = new ProjectService()
+const project = ref<ProjectDataDTO | undefined>()
 
-const project = projectService.Details(projectId)
+onMounted(async () => {
+  await fetchProjectDetails()
+})
+
+const fetchProjectDetails = async () => {
+  project.value = await projectService.GetProject(projectId)
+}
 </script>
 
 <style scoped>

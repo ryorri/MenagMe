@@ -1,7 +1,601 @@
 [
   {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.ProjectController",
+    "Method": "CreateProject",
+    "RelativePath": "api/Project/create-project",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "MenagMeWebApi.Application.Objects.ProjectDTO.ProjectCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.ProjectController",
+    "Method": "DeleteProject",
+    "RelativePath": "api/Project/detele-project",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.ProjectController",
+    "Method": "GetProject",
+    "RelativePath": "api/Project/get-project",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MenagMeWebApi.Application.Objects.ProjectDTO.ProjectDataDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.ProjectController",
+    "Method": "GetProjectList",
+    "RelativePath": "api/Project/get-project-list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[MenagMeWebApi.Application.Objects.ProjectDTO.ProjectDataDTO, MenagMeWebApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.ProjectController",
+    "Method": "UpdateProject",
+    "RelativePath": "api/Project/update-project",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newProject",
+        "Type": "MenagMeWebApi.Application.Objects.ProjectDTO.ProjectCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.StoryController",
+    "Method": "CreateStory",
+    "RelativePath": "api/Story/create-story",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "MenagMeWebApi.Application.Objects.StoriesDTO.StoryCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.StoryController",
+    "Method": "DeleteStory",
+    "RelativePath": "api/Story/detele-story",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "storyId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.StoryController",
+    "Method": "GetStoriesList",
+    "RelativePath": "api/Story/get-stories-list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[MenagMeWebApi.Application.Objects.StoriesDTO.StoryDataDTO, MenagMeWebApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.StoryController",
+    "Method": "GetStoriesListByProject",
+    "RelativePath": "api/Story/get-stories-list-by-project",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[MenagMeWebApi.Application.Objects.StoriesDTO.StoryDataDTO, MenagMeWebApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.StoryController",
+    "Method": "GetStory",
+    "RelativePath": "api/Story/get-story",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "storyId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MenagMeWebApi.Application.Objects.StoriesDTO.StoryDataDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.StoryController",
+    "Method": "UpdateStoryPriority",
+    "RelativePath": "api/Story/update-priority",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "storyId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newPriority",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.StoryController",
+    "Method": "UpdateStoryState",
+    "RelativePath": "api/Story/update-state",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "storyId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newState",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.StoryController",
+    "Method": "UpdateStory",
+    "RelativePath": "api/Story/update-story",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "storyId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newStory",
+        "Type": "MenagMeWebApi.Application.Objects.StoriesDTO.StoryCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.TasksController",
+    "Method": "AssignUser",
+    "RelativePath": "api/Tasks/assign-user-to-task",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.TasksController",
+    "Method": "CreateTask",
+    "RelativePath": "api/Tasks/create-task",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "MenagMeWebApi.Application.Objects.TasksDTO.TasksCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.TasksController",
+    "Method": "DeleteTask",
+    "RelativePath": "api/Tasks/detele-task",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.TasksController",
+    "Method": "GetTask",
+    "RelativePath": "api/Tasks/get-task",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MenagMeWebApi.Application.Objects.TasksDTO.TasksDataDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.TasksController",
+    "Method": "GetTasksList",
+    "RelativePath": "api/Tasks/get-tasks-list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[MenagMeWebApi.Application.Objects.TasksDTO.TasksDataDTO, MenagMeWebApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.TasksController",
+    "Method": "GetTaskListByStoryId",
+    "RelativePath": "api/Tasks/get-tasks-list-by-story",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "storyId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[MenagMeWebApi.Application.Objects.TasksDTO.TasksDataDTO, MenagMeWebApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.TasksController",
+    "Method": "UpdateTask",
+    "RelativePath": "api/Tasks/update-task",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newTask",
+        "Type": "MenagMeWebApi.Application.Objects.TasksDTO.TasksCreateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.TasksController",
+    "Method": "UpdateTaskPriority",
+    "RelativePath": "api/Tasks/update-task-priority",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newPriority",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.TasksController",
+    "Method": "UpdateTaskStateAndDates",
+    "RelativePath": "api/Tasks/update-task-state-and-dates",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newState",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "MenagMeWebApi.Presentation.Controllers.UserController",
-    "Method": "GetRefreshToken",
+    "Method": "GetByRefreshToken",
     "RelativePath": "api/User/get-refresh-token",
     "HttpMethod": "GET",
     "IsController": true,
@@ -9,6 +603,11 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "refreshToken",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -59,6 +658,32 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[MenagMeWebApi.Application.Objects.UserDTO.UserDataDTO, MenagMeWebApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MenagMeWebApi.Presentation.Controllers.UserController",
+    "Method": "GetUserListByRole",
+    "RelativePath": "api/User/get-user-list-by-role",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[MenagMeWebApi.Application.Objects.UserDTO.UserDataDTO, MenagMeWebApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",

@@ -1,77 +1,66 @@
-import type { ProjectInterface } from '@/lib/domain/interfaces/projectInterface'
-import Project from '@/lib/domain/models/project'
+import { Backend } from '@/main'
+import type { ProjectCreateDTO, ProjectDataDTO } from '@/backend/BaseApi'
 
 class ProjectService {
-  noOfProjs: number
-
-  constructor() {
-    const storedNoOfProjs = localStorage.getItem('noOfProjs')
-    this.noOfProjs = storedNoOfProjs ? parseInt(storedNoOfProjs, 10) : 0
-  }
-
-  GetNoOfProjs(): number {
-    return this.noOfProjs
-  }
-
-  GetProjectsList(): ProjectInterface[] {
-    const result: ProjectInterface[] = []
-
-    for (let i = 0; i < this.noOfProjs; i++) {
-      const projRaw = localStorage.getItem('proj' + i)
-      if (projRaw) {
-        const proj = JSON.parse(projRaw) as ProjectInterface
-        result.push(proj)
-      }
+  async CreateProject(project: ProjectCreateDTO): Promise<boolean | undefined> {
+    try {
+      await Backend.createProject(project)
+      return true
+    } catch (ex) {
+      console.log(ex)
     }
-    return result
   }
 
-  SetSelectProject(id: number | null): void {
-    const raw = localStorage.getItem('proj' + id)
+  async DeleteProject(id: string): Promise<boolean | undefined> {
+    try {
+      await Backend.deteleProject(id)
+      return true
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+  async GetProjectList(): Promise<ProjectDataDTO[] | undefined> {
+    try {
+      const projectList = await Backend.getProjectList()
+      return projectList
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+  async GetProject(id: string): Promise<ProjectDataDTO | undefined> {
+    try {
+      const project = await Backend.getProject(id)
+      return project
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+  async UpdateProject(id: string, project: ProjectDataDTO): Promise<boolean | undefined> {
+    try {
+      await Backend.updateProject(id, project)
+      return true
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
 
-    if (id == null) {
+  async SetSelectProject(id: string): Promise<void> {
+    if (id == null || id === '') {
       localStorage.removeItem('selectedProject')
-    } else if (id != null && raw != null) {
-      localStorage.setItem('selectedProject', raw)
+      return
+    }
+    const raw = await this.GetProject(id)
+
+    if (id != null && raw != null) {
+      localStorage.setItem('selectedProject', JSON.stringify(raw))
     }
   }
 
-  GetSelectProject(): ProjectInterface | null {
+  GetSelectProject(): ProjectDataDTO | null {
     const raw = localStorage.getItem('selectedProject')
     if (raw) {
-      return JSON.parse(raw) as ProjectInterface
+      return JSON.parse(raw) as ProjectDataDTO
     } else return null
-  }
-
-  Create(name: string, desc: string): void {
-    const proj = new Project(this.noOfProjs, name, desc)
-
-    localStorage.setItem('proj' + this.noOfProjs, JSON.stringify(proj))
-
-    this.noOfProjs += 1
-
-    localStorage.setItem('noOfProjs', this.noOfProjs.toString())
-  }
-
-  Details(id: number): ProjectInterface | null {
-    const projRaw = localStorage.getItem('proj' + id)
-
-    if (projRaw) {
-      const proj = JSON.parse(projRaw) as ProjectInterface
-      return proj
-    } else {
-      return null
-    }
-  }
-
-  Edit(id: number, name: string, desc: string): void {
-    const proj = new Project(id, name, desc)
-
-    localStorage.setItem('proj' + id, JSON.stringify(proj))
-  }
-
-  Delete(id: number): void {
-    localStorage.removeItem('proj' + id)
   }
 }
 

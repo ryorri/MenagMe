@@ -17,7 +17,7 @@
         <label for="desc">Description:</label>
         <textarea
           id="desc"
-          v-model="data.desc"
+          v-model="data.description"
           class="form-control"
           placeholder="Enter project description"
           required
@@ -41,8 +41,9 @@ import ProjectService from '@/lib/application/services/projectService'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
 import { useRouter } from 'vue-router'
 import { useThemeStore } from '@/lib/application/stores/theme'
+import type { ProjectCreateDTO } from '@/backend/BaseApi'
 
-const data = ref({ name: '', desc: '' })
+const data = ref<ProjectCreateDTO>({ name: '', description: '' })
 const service = new ProjectService()
 const router = useRouter()
 const themeStore = useThemeStore()
@@ -50,9 +51,9 @@ const themeStore = useThemeStore()
 // Initialize theme on component mount
 themeStore.initializeTheme()
 
-const createProject = () => {
-  service.Create(data.value.name, data.value.desc)
-  data.value = { name: '', desc: '' }
+const createProject = async () => {
+  service.CreateProject(data.value)
+  data.value = { name: '', description: '' }
   router.push({ name: 'ProjectList' })
 }
 </script>

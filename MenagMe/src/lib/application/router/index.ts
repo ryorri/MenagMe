@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/lib/presentation/views/HomeView.vue'
 import LoginPage from '@/lib/presentation/views/LoginPage.vue'
+import { isTokenExpired } from '../extensions/tokenExpValidator'
+
+let checkToken = false
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -89,7 +92,7 @@ const router = createRouter({
       component: () => import('@/lib/presentation/views/TaskViews/TaskDelete.vue'),
     },
     {
-      path: '/task/changestate/:projectId/:storyId/:taskId',
+      path: '/task/changestateanduser/:projectId/:storyId/:taskId',
       name: 'TaskChangeStateAssignUser',
       component: () => import('@/lib/presentation/views/TaskViews/TaskAssignUserChangeState.vue'),
     },
@@ -105,6 +108,22 @@ const router = createRouter({
       component: () => import('@/lib/presentation/views/NoProject.vue'),
     },
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  if (!checkToken) checkToken = true
+
+  const raw = localStorage.getItem('loggedUser')
+  if (raw) {
+    const parsed = JSON.parse(raw)
+    const token = parsed.token
+
+    if (!token || isTokenExpired(token)) {
+      localStorage.removeItem('loggedUser')
+      next({ name: 'login' })
+    }
+  }
+  next()
 })
 
 export default router

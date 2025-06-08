@@ -1,14 +1,14 @@
 <template>
   <mainLayout>
-    <div class="task-details">
+    <div class="task-details" v-if="task">
       <h2 class="task-title">{{ task?.name }}</h2>
-      <p class="task-desc">{{ task?.desc }}</p>
+      <p class="task-desc">{{ task?.description }}</p>
 
       <div class="task-info">
-        <p><strong>Priority:</strong> {{ task?.prio }}</p>
-        <p><strong>State:</strong> {{ task?.state }}</p>
+        <p><strong>Priority:</strong> {{ task?.priority }}</p>
+        <p><strong>State:</strong> {{ task?.status }}</p>
         <p><strong>Created At:</strong> {{ formatDate(task?.createdAt) }}</p>
-        <p><strong>Story:</strong> {{ task?.story.name }}</p>
+        <p><strong>Story:</strong> {{ story?.name }}</p>
         <p><strong>Estimated date:</strong> {{ formatDate(task?.estimatedTime) }}</p>
         <p><strong>Start date:</strong> {{ formatDate(task?.startDate) }}</p>
         <p><strong>End date:</strong> {{ formatDate(task?.endDate) }}</p>
@@ -16,9 +16,16 @@
           <strong>Man hours:</strong>
           {{ manHours(dateToTimestamp(task?.endDate), dateToTimestamp(task?.startDate)) }}
         </p>
-        <p><strong>Autor:</strong> {{ task?.user?.name }}</p>
-        <p><strong>Assigned user :</strong> {{ task?.signedUser?.name }}</p>
+        <p v-if="author">
+          <strong>Autor:</strong> {{ author.name }} {{ author.surname }} ({{ author.role }})
+        </p>
+        <p v-if="user">
+          <strong>Assigned user :</strong> {{ user.name }} {{ user.surname }} ({{ user.role }})
+        </p>
       </div>
+    </div>
+    <div v-else>
+      <p>Loading task details...</p>
     </div>
   </mainLayout>
 </template>
@@ -28,13 +35,21 @@ import { useRoute } from 'vue-router'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
 import TaskService from '@/lib/application/services/taskService'
 import { formatDate, dateToTimestamp } from '@/lib/application/extensions/dateFormatter'
+import { onMounted, ref } from 'vue'
+import StoryService from '@/lib/application/services/storyService'
+import UserService from '@/lib/application/services/userService'
 const route = useRoute()
 const taskService = new TaskService()
+const storyService = new StoryService()
+const userService = new UserService()
 
-const storyId = Number(route.params.storyId)
-const taskId = Number(route.params.taskId)
+const storyId = String(route.params.storyId)
+const taskId = String(route.params.taskId)
 
-const task = taskService.Details(taskId, storyId)
+const task = ref()
+const story = ref()
+const author = ref()
+const user = ref()
 
 const manHours = (end: number, start: number) => {
   const differenceInMilliseconds = end - start
@@ -45,6 +60,13 @@ const manHours = (end: number, start: number) => {
   const differenceInHours = differenceInMilliseconds / (1000 * 60 * 60)
   return parseFloat(differenceInHours.toFixed(2))
 }
+
+onMounted(async () => {
+  task.value = await taskService.GetTask(taskId)
+  story.value = await storyService.GetStory(storyId)
+  author.value = await userService.GetUser(task.value.userId)
+  user.value = await userService.GetUser(task.value.assignedUserId)
+})
 </script>
 
 <style scoped>

@@ -8,7 +8,9 @@
       Create STORY
     </button>
 
+    <div v-if="!storiesList">Loading...</div>
     <table
+      v-else
       :class="[
         'table table-striped table-bordered',
         themeStore.isDarkMode ? 'table-dark' : 'table-light',
@@ -20,6 +22,8 @@
         <tr>
           <th>Name</th>
           <th>Description</th>
+          <th>Status</th>
+          <th>Priority</th>
           <th>Details</th>
           <th>Edit</th>
           <th>Delete</th>
@@ -28,53 +32,61 @@
       <tbody>
         <tr>
           <td>{{ story.name }}</td>
-          <td>{{ story.desc }}</td>
+          <td>{{ story.description }}</td>
+          <td>{{ story.status }}</td>
+          <td>{{ story.priority }}</td>
           <td>
-            <button class="btn btn-info" @click="goToDetailsStory(story.id)">Show details</button>
+            <button class="btn btn-info" @click="goToDetailsStory(story.id!)">Show details</button>
           </td>
           <td>
-            <button class="btn btn-warning" @click="goToEditStory(story.id)">Edit story</button>
+            <button class="btn btn-warning" @click="goToEditStory(story.id!)">Edit story</button>
           </td>
           <td>
-            <button class="btn btn-danger" @click="goToDeleteStory(story.id)">Delete story</button>
+            <button class="btn btn-danger" @click="goToDeleteStory(story.id!)">Delete story</button>
           </td>
         </tr>
-        <tr class="toggle-arrow" @click="toggleDetails(story.id)">
-          <td colspan="5">▼</td>
+        <tr class="toggle-arrow" @click="toggleDetails(story.id!)">
+          <td colspan="7">▼</td>
         </tr>
-        <tr v-if="toogleDetails === story.id">
-          <td colspan="5">
+        <tr v-if="storyId === story.id">
+          <td colspan="7">
             <taskLayout>
               <!--TaskList-->
               <template #createbutton
                 ><button
                   class="btn mb-4 create-project-btn"
                   :class="themeStore.isDarkMode ? 'btn-dark' : 'btn-success'"
-                  @click="goToCreateTask(story.id)"
+                  @click="goToCreateTask(storyId.value)"
                 >
                   Create TASK
                 </button></template
               >
               <template #todo>
-                <div v-for="task in tasksList(story.id, 'TODO')" :key="task.id" class="task-item">
+                <div v-for="task in getTaskListByState('ToDo')" :key="task.id" class="task-item">
                   <div class="task-name">{{ task.name }}</div>
                   <div class="task-buttons">
                     <button
                       class="btn btn-secondary me-2"
-                      @click="goToDetailsTask(task.id, story.id)"
+                      @click="goToDetailsTask(task.id || '', story.id || '')"
                     >
                       Details
                     </button>
-                    <button class="btn btn-secondary me-2" @click="goToEditTask(task.id, story.id)">
+                    <button
+                      class="btn btn-secondary me-2"
+                      @click="goToEditTask(task.id || '', story.id || '')"
+                    >
                       Edit task
                     </button>
                     <button
                       class="btn btn-secondary me-2"
-                      @click="goToAssignUserChangeStateTask(task.id, story.id)"
+                      @click="goToAssignUserChangeStateTask(task.id || '', story.id || '')"
                     >
                       Assign user & edit state
                     </button>
-                    <button class="btn btn-danger" @click="goToDeleteTask(task.id, story.id)">
+                    <button
+                      class="btn btn-danger"
+                      @click="goToDeleteTask(task.id || '', story.id || '')"
+                    >
                       Delete task
                     </button>
                   </div>
@@ -82,7 +94,7 @@
               </template>
               <template #inProgress>
                 <div
-                  v-for="task in tasksList(story.id, 'IN PROGRESS')"
+                  v-for="task in getTaskListByState('InProgress')"
                   :key="task.id"
                   class="task-item"
                 >
@@ -90,20 +102,26 @@
                   <div class="task-buttons">
                     <button
                       class="btn btn-secondary me-2"
-                      @click="goToDetailsTask(task.id, story.id)"
+                      @click="goToDetailsTask(task.id || '', story.id || '')"
                     >
                       Details
                     </button>
-                    <button class="btn btn-secondary me-2" @click="goToEditTask(task.id, story.id)">
+                    <button
+                      class="btn btn-secondary me-2"
+                      @click="goToEditTask(task.id || '', story.id || '')"
+                    >
                       Edit task
                     </button>
                     <button
                       class="btn btn-secondary me-2"
-                      @click="goToChangeStateTask(task.id, story.id)"
+                      @click="goToChangeStateTask(task.id || '', story.id || '')"
                     >
                       Edit state
                     </button>
-                    <button class="btn btn-danger" @click="goToDeleteTask(task.id, story.id)">
+                    <button
+                      class="btn btn-danger"
+                      @click="goToDeleteTask(task.id || '', story.id || '')"
+                    >
                       Delete task
                     </button>
                   </div>
@@ -111,22 +129,25 @@
               </template>
 
               <template #done>
-                <div v-for="task in tasksList(story.id, 'DONE')" :key="task.id" class="task-item">
+                <div v-for="task in getTaskListByState('Done')" :key="task.id" class="task-item">
                   <div class="task-name">{{ task.name }}</div>
                   <div class="task-buttons">
                     <button
                       class="btn btn-secondary me-2"
-                      @click="goToDetailsTask(task.id, story.id)"
+                      @click="goToDetailsTask(task.id || '', story.id || '')"
                     >
                       Details
                     </button>
                     <button
                       class="btn btn-secondary me-2"
-                      @click="goToChangeStateTask(task.id, story.id)"
+                      @click="goToChangeStateTask(task.id || '', story.id || '')"
                     >
                       Edit state
                     </button>
-                    <button class="btn btn-danger" @click="goToDeleteTask(task.id, story.id)">
+                    <button
+                      class="btn btn-danger"
+                      @click="goToDeleteTask(task.id || '', story.id || '')"
+                    >
                       Delete task
                     </button>
                   </div>
@@ -140,7 +161,101 @@
   </mainLayout>
 </template>
 
-<style lang="css">
+<script setup lang="ts">
+import { useRoute, useRouter } from 'vue-router'
+import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
+import StoryService from '@/lib/application/services/storyService'
+import { ref, onMounted } from 'vue'
+import taskLayout from '@/lib/presentation/layouts/taskLayout.vue'
+import TaskService from '@/lib/application/services/taskService'
+import { useThemeStore } from '@/lib/application/stores/theme'
+import type { StoryDataDTO, TasksDataDTO } from '@/backend/BaseApi'
+
+const route = useRoute()
+const router = useRouter()
+
+const projectId = String(route.params.projectId) || ''
+const storyId = ref()
+
+const storiesService = new StoryService()
+const taskService = new TaskService()
+
+const storiesList = ref<StoryDataDTO[] | undefined>([])
+const tasksList = ref<TasksDataDTO[] | undefined>([])
+
+const themeStore = useThemeStore()
+
+const goToCreateStory = () => {
+  router.push({ name: 'StoryCreate', params: { projectId: projectId } })
+}
+const goToEditStory = (_storyid: string) => {
+  router.push({ name: 'StoryEdit', params: { projectId: projectId, storyId: _storyid } })
+}
+const goToDeleteStory = (_storyid: string) => {
+  router.push({ name: 'StoryDelete', params: { projectId: projectId, storyId: _storyid } })
+}
+const goToDetailsStory = (_storyid: string) => {
+  router.push({ name: 'StoryDetails', params: { projectId: projectId, storyId: _storyid } })
+}
+const goToCreateTask = (_storyid: string) => {
+  router.push({ name: 'TaskCreate', params: { projectId: projectId, storyId: storyId.value } })
+}
+const goToDeleteTask = (taskId: string, storyId: string) => {
+  router.push({
+    name: 'TaskDelete',
+    params: { projectId: projectId, storyId: storyId, taskId: taskId },
+  })
+}
+const goToDetailsTask = (taskId: string, storyId: string) => {
+  router.push({
+    name: 'TaskDetails',
+    params: { projectId: projectId, storyId: storyId, taskId: taskId },
+  })
+}
+const goToEditTask = (taskId: string, storyId: string) => {
+  router.push({
+    name: 'TaskEdit',
+    params: { projectId: projectId, storyId: storyId, taskId: taskId },
+  })
+}
+
+const goToChangeStateTask = (taskId: string, storyId: string) => {
+  router.push({
+    name: 'TaskChangeState',
+    params: { projectId: projectId, storyId: storyId, taskId: taskId },
+  })
+}
+
+const goToAssignUserChangeStateTask = (taskId: string, storyId: string) => {
+  router.push({
+    name: 'TaskChangeStateAssignUser',
+    params: { projectId: projectId, storyId: storyId, taskId: taskId },
+  })
+}
+
+onMounted(() => {
+  fetchStoriesList()
+})
+
+const fetchStoriesList = async () => {
+  storiesList.value = await storiesService.GetStoryListByProject(projectId)
+}
+const toggleDetails = async (Id: string) => {
+  storyId.value = Id
+  await fetchTasksList(Id)
+  console.log(tasksList)
+}
+
+const fetchTasksList = async (storyId: string) =>
+  (tasksList.value = await taskService.GetSpecificTaskListByStory(storyId))
+
+const getTaskListByState = (state: string) => {
+  if (tasksList) return tasksList.value?.filter((task) => task.status === state) || []
+  console.log(tasksList)
+}
+</script>
+
+<style scoped>
 .toggle-arrow {
   background-color: #f8f9fa;
   text-align: center;
@@ -155,10 +270,20 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+.dark-mode .task-item {
+  background-color: #23272b;
+  border: 1px solid #444950;
+  color: #f1f1f1;
+}
+
 .task-name {
   font-weight: bold;
   margin-bottom: 10px;
   font-size: 16px;
+}
+
+.dark-mode .task-name {
+  color: #f1f1f1;
 }
 
 .task-buttons {
@@ -175,6 +300,24 @@
 .task-buttons button {
   width: 100%;
   text-align: center;
+}
+
+.dark-mode .task-buttons button {
+  background-color: #343a40;
+  color: #f1f1f1;
+  border-color: #444950;
+}
+
+.dark-mode .task-buttons button.btn-danger {
+  background-color: #c82333;
+  border-color: #c82333;
+  color: #fff;
+}
+
+.dark-mode .task-buttons button.btn-secondary {
+  background-color: #495057;
+  border-color: #495057;
+  color: #fff;
 }
 
 /* Adjust buttons in dark mode */
@@ -221,10 +364,7 @@
   background-color: #23272b;
   border-color: #23272b;
 }
-</style>
 
-<style scoped>
-/* Table styles from ProjectList.vue */
 .table {
   width: 100%;
   margin-top: 20px;
@@ -321,89 +461,3 @@
   border-color: #c82333;
 }
 </style>
-
-<script setup lang="ts">
-import type { StoryInterface } from '@/lib/domain/interfaces/storyInterface'
-import { useRoute, useRouter } from 'vue-router'
-import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
-import StoryService from '@/lib/application/services/storyService'
-import { ref, onMounted } from 'vue'
-import taskLayout from '@/lib/presentation/layouts/taskLayout.vue'
-import TaskService from '@/lib/application/services/taskService'
-import { useThemeStore } from '@/lib/application/stores/theme'
-
-const route = useRoute()
-const router = useRouter()
-
-const projectId = Number(route.params.projectId)
-const toogleDetails = ref<number | null>(null)
-
-const storiesService = new StoryService()
-const taskService = new TaskService()
-
-const storiesList = ref<StoryInterface[] | null>([])
-
-const themeStore = useThemeStore()
-
-const goToCreateStory = () => {
-  router.push({ name: 'StoryCreate', params: { projectId: projectId } })
-}
-const goToEditStory = (_storyid: number) => {
-  router.push({ name: 'StoryEdit', params: { projectId: projectId, storyId: _storyid } })
-}
-const goToDeleteStory = (_storyid: number) => {
-  router.push({ name: 'StoryDelete', params: { projectId: projectId, storyId: _storyid } })
-}
-const goToDetailsStory = (_storyid: number) => {
-  router.push({ name: 'StoryDetails', params: { projectId: projectId, storyId: _storyid } })
-}
-const goToCreateTask = (storyId: number) => {
-  router.push({ name: 'TaskCreate', params: { projectId: projectId, storyId: storyId } })
-}
-const goToDeleteTask = (taskId: number, storyId: number) => {
-  router.push({
-    name: 'TaskDelete',
-    params: { projectId: projectId, storyId: storyId, taskId: taskId },
-  })
-}
-const goToDetailsTask = (taskId: number, storyId: number) => {
-  router.push({
-    name: 'TaskDetails',
-    params: { projectId: projectId, storyId: storyId, taskId: taskId },
-  })
-}
-const goToEditTask = (taskId: number, storyId: number) => {
-  router.push({
-    name: 'TaskEdit',
-    params: { projectId: projectId, storyId: storyId, taskId: taskId },
-  })
-}
-
-const goToChangeStateTask = (taskId: number, storyId: number) => {
-  router.push({
-    name: 'TaskChangeState',
-    params: { projectId: projectId, storyId: storyId, taskId: taskId },
-  })
-}
-
-const goToAssignUserChangeStateTask = (taskId: number, storyId: number) => {
-  router.push({
-    name: 'TaskChangeStateAssignUser',
-    params: { projectId: projectId, storyId: storyId, taskId: taskId },
-  })
-}
-
-onMounted(() => {
-  fetchStoriesList()
-})
-
-const fetchStoriesList = () => {
-  storiesList.value = storiesService.GetStoriesList(projectId)
-}
-const toggleDetails = (storyId: number) => {
-  toogleDetails.value = toogleDetails.value === storyId ? null : storyId
-}
-
-const tasksList = (storyId: number, state: string) =>
-  taskService.GetSpecifiedTasksList(storyId, state)
-</script>

@@ -11,12 +11,12 @@
 
         <div class="form-group">
           <label for="desc">Description</label>
-          <textarea v-model="data.desc" id="desc" class="form-control" required></textarea>
+          <textarea v-model="data.description" id="desc" class="form-control" required></textarea>
         </div>
 
         <div class="form-group">
           <label for="prio">Priority</label>
-          <select v-model="data.prio" id="prio" class="form-control">
+          <select v-model="data.priority" id="prio" class="form-control">
             <option v-for="priority in priorities" :key="priority" :value="priority">
               {{ priority }}
             </option>
@@ -25,7 +25,7 @@
 
         <div class="form-group">
           <label for="state">State</label>
-          <select v-model="data.state" id="state" class="form-control">
+          <select v-model="data.status" id="state" class="form-control">
             <option v-for="state in states" :key="state" :value="state">
               {{ state }}
             </option>
@@ -34,7 +34,13 @@
 
         <div class="form-group">
           <label for="estTime">Estimated Time</label>
-          <input v-model="data.estTime" type="date" id="estTime" class="form-control" required />
+          <input
+            v-model="data.estimatedTime"
+            type="date"
+            id="estTime"
+            class="form-control"
+            required
+          />
         </div>
         <button
           type="submit"
@@ -49,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import mainLayout from '@/lib/presentation/layouts/mainLayout.vue'
 import { useRoute, useRouter } from 'vue-router'
 import StateEnum from '@/lib/domain/enums/state'
@@ -57,51 +63,45 @@ import PriorityEnum from '@/lib/domain/enums/priority'
 import UserService from '@/lib/application/services/userService'
 import StoryService from '@/lib/application/services/storyService'
 import TaskService from '@/lib/application/services/taskService'
-import type { StoryInterface } from '@/lib/domain/interfaces/storyInterface'
-import type { UserInterface } from '@/lib/domain/interfaces/userInterface'
+
 import { useThemeStore } from '@/lib/application/stores/theme'
+import type { UserDataDTO, TasksCreateDTO } from '@/backend/BaseApi'
 
 const router = useRouter()
 const route = useRoute()
 
-const projectId = Number(route.params.projectId)
-const storyId = Number(route.params.storyId)
+const projectId = String(route.params.projectId)
+const storyId = String(route.params.storyId)
 
 const userService = new UserService()
-const storyService = new StoryService()
 const taskService = new TaskService()
 
 const priorities = Object.values(PriorityEnum)
 const states = Object.values(StateEnum)
-const selectedStory = storyService.GetStory(storyId, projectId) as StoryInterface
-const currentUser = userService.GetCurrentUser()
+const currentUser = ref<UserDataDTO>()
 
 const themeStore = useThemeStore()
 
-const data = ref({
+const data = ref<TasksCreateDTO>({
   name: '',
-  desc: '',
-  prio: PriorityEnum.low,
-  estTime: new Date(),
-  state: StateEnum.todo,
-  signedUser: null,
+  description: '',
+  priority: PriorityEnum.low,
+  estimatedTime: new Date(),
+  status: StateEnum.todo,
+  userId: '',
+  storyId: storyId,
 })
 
-const createTask = () => {
-  taskService.Create(
-    data.value.name,
-    data.value.desc,
-    selectedStory,
-    data.value.prio,
-    data.value.estTime,
-    data.value.state,
-    null,
-    null,
-    data.value.signedUser,
-    currentUser,
-  )
+const createTask = async () => {
+  data.value.userId = currentUser.value?.id || ''
+  await taskService.CreateTask(data.value)
+
   router.push({ name: 'StoryList', params: { projectId: projectId } })
 }
+
+onMounted(async () => {
+  currentUser.value = await userService.GetCurrentUser()
+})
 </script>
 
 <style scoped>

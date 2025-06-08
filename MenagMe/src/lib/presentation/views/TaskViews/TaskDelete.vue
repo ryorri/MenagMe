@@ -18,21 +18,26 @@
 import { useRoute, useRouter } from 'vue-router'
 import mainLayout from '../../layouts/mainLayout.vue'
 import TaskService from '@/lib/application/services/taskService'
+import { onMounted, ref } from 'vue'
 
 const route = useRoute()
 const router = useRouter()
 
-const storyId = Number(route.params.storyId)
-const taskId = Number(route.params.taskId)
+const storyId = String(route.params.storyId)
+const taskId = String(route.params.taskId)
 
 const taskService = new TaskService()
 
-const task = taskService.Details(taskId, storyId)
+const task = ref()
 
-const deleteTask = (id: number) => {
-  taskService.Delete(id, storyId)
+const deleteTask = async (id: string) => {
+  await taskService.DeleteTask(id)
   router.push({ name: 'StoryList' })
 }
+
+onMounted(async () => {
+  task.value = await taskService.GetTask(taskId)
+})
 </script>
 
 <style scoped>

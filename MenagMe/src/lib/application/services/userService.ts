@@ -1,9 +1,5 @@
-import type { UserInterface } from '@/lib/domain/interfaces/userInterface'
-import User from '../../domain/models/user'
-import type RolesEnum from '@/lib/domain/enums/roles'
 import { Backend } from '@/main'
-import type { UserDataDTO } from '@/backend/BaseApi'
-import { JsxEmit } from 'typescript'
+import type { UserDataDTO, UserCreateDTO } from '@/backend/BaseApi'
 
 class UserService {
   constructor() {}
@@ -14,8 +10,7 @@ class UserService {
 
       if (userDataRaw) {
         const userDataParsed = JSON.parse(userDataRaw)
-        const user = await Backend.getUser(userDataParsed.result.id)
-        return user
+        return userDataParsed.result as UserDataDTO
       }
     } catch (ex) {
       console.log(ex)
@@ -30,20 +25,46 @@ class UserService {
       console.log(ex)
     }
   }
-  Create(id: string, name: string, sur: string, role: RolesEnum) {
-    const user = new User(id, name, sur, role)
 
-    localStorage.setItem('user' + name + sur, JSON.stringify(user))
+  async Create(userCreateDTO: UserCreateDTO): Promise<UserCreateDTO | undefined> {
+    try {
+      const user = await Backend.register(userCreateDTO)
+      return user
+    } catch (ex) {
+      console.log(ex)
+    }
   }
-  async Login(name: string, psw: string) {
+
+  async Login(name: string, psw: string): Promise<UserDataDTO | undefined> {
     try {
       const user = await Backend.logIn(name, psw)
       if (user) {
         localStorage.setItem('loggedUser', JSON.stringify(user))
-        return true
+        await Backend.restoreTokens()
+        return user
       }
-    } catch {
-      return false
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+
+  async GetUser(id: string): Promise<UserDataDTO | undefined> {
+    try {
+      const user = await Backend.getUser(id)
+      if (user) {
+        return user
+      }
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+
+  async GetUserListByRole(role: string): Promise<UserDataDTO[] | undefined> {
+    try {
+      const userList = await Backend.getUserListByRole(role)
+      return userList
+    } catch (ex) {
+      console.log(ex)
     }
   }
 }

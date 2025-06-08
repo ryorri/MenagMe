@@ -41,7 +41,7 @@ namespace MenagMeWebApi.Presentation.Controllers
                 if (result != null)
                 {
                     var token = _tokenService.GenerateToken(result);
-                    var refreshToken = _tokenService.GenerateRefreshToken();
+                    var refreshToken = await _userService.GetRefreshTokenFromDB(result.Id);
                     return Ok(new { result, token, refreshToken });
                 }
                 else
@@ -74,6 +74,23 @@ namespace MenagMeWebApi.Presentation.Controllers
 
         }
 
+        [Authorize]
+        [HttpGet("get-user-list-by-role")]
+        public async Task<ActionResult<List<UserDataDTO>>> GetUserListByRole(string role)
+        {
+
+            try
+            {
+                var result = await _userService.GetUsersByRole(role);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+
+        }
+
 
         [Authorize]
         [HttpGet("get-user")]
@@ -94,19 +111,27 @@ namespace MenagMeWebApi.Presentation.Controllers
 
         
 
-        [Authorize]
         [HttpGet("get-refresh-token")]
-        public async Task<ActionResult<string>> GetRefreshToken(string id)
+        public async Task<ActionResult<string>> GetByRefreshToken(string id, string refreshToken)
         {
 
             try
             {
-                var result = _tokenService.GenerateRefreshToken();
-
                 var user = await _userService.GetUser(id);
                 
-                var token = _tokenService.GenerateToken(user!);
-                return Ok(new { result, token });
+
+                if(user != null && await _userService.CheckRefreshToken(id,refreshToken))
+                {
+                    var newRefreshToken = _tokenService.GenerateRefreshToken();
+                     await _userService.AssignNewRefreshToken(id,newRefreshToken);
+                    var token = _tokenService.GenerateToken(user!);
+                    return Ok(new { newRefreshToken, token });
+                }
+                else
+                {
+                    return BadRequest(new { message = "Invalid refresh token" });
+                }
+
             }
             catch (Exception ex)
             {

@@ -1,8 +1,7 @@
 enum PriorityEnum {
   low = 'LOW',
-  med = 'MEDIUM',
+  medium = 'MEDIUM',
   high = 'HIGH',
-  crit = 'CRITICAL',
 }
 
 export default PriorityEnum

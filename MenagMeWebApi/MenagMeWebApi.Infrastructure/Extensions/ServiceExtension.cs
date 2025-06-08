@@ -23,7 +23,7 @@ namespace MenagMeWebApi.Infrastructure.Extensions
         {
             var userDto = _mapper.Map<UserDataDTO>(user);
 
-            var userId = user.Id;
+            var userId = user.Id.ToString();
             var exists = await _userManager.FindByIdAsync(userId);
             if (exists != null)
             {
