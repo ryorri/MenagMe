@@ -63,8 +63,7 @@
               "RelativeToolTip": "MenagMeWebApi.Presentation\\Controllers\\UserController.cs",
               "ViewState": "AgIAAEQAAAAAAAAAAAAIwGUAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T21:26:58.04Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-08T21:26:58.04Z"
             },
             {
               "$type": "Document",
@@ -76,8 +75,7 @@
               "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Services\\TokenService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T20:24:48.057Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-08T20:24:48.057Z"
             },
             {
               "$type": "Document",
@@ -89,8 +87,7 @@
               "RelativeToolTip": "MenagMeWebApi.Presentation\\Controllers\\StoryController.cs",
               "ViewState": "AgIAAGAAAAAAAAAAAAAmwHUAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T20:23:53.146Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-08T20:23:53.146Z"
             },
             {
               "$type": "Document",
@@ -102,8 +99,7 @@
               "RelativeToolTip": "MenagMeWebApi.Presentation\\Controllers\\TasksController.cs",
               "ViewState": "AgIAAHcAAAAAAAAAAAAAwJIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T09:28:50.289Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-08T09:28:50.289Z"
             },
             {
               "$type": "Document",
@@ -115,8 +111,7 @@
               "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Services\\StoryService.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAgwHwAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T09:28:01.063Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-08T09:28:01.063Z"
             },
             {
               "$type": "Document",
@@ -128,8 +123,7 @@
               "RelativeToolTip": "MenagMeWebApi.Infrastructure\\Services\\TasksService.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAAwMAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T09:27:05.451Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-08T09:27:05.451Z"
             }
           ]
         },

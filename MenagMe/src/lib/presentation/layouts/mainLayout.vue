@@ -15,7 +15,7 @@
       <!--Login-->
       <div v-if="user" class="user-box d-flex align-items-center">
         <span>{{ user?.name }} {{ user?.surname }}</span>
-        <button class="btn btn-outline-light btn-sm log-out-btn">Log out</button>
+        <button class="btn btn-outline-light btn-sm log-out-btn" @click="Loguot">Log out</button>
       </div>
 
       <!--Select project-->
@@ -118,6 +118,11 @@ onUnmounted(() => {
   }
 })
 
+const Loguot = () => {
+  userService.Logout()
+  router.push({ name: 'login' })
+}
+
 const fetchSelectedProject = () => {
   selectedProject.value = projectService.GetSelectProject()
 }
@@ -129,20 +134,20 @@ const fetchProjectList = async () => {
   }
 }
 
-const selectProject = (event: Event) => {
+const selectProject = async (event: Event) => {
   const target = event.target as HTMLSelectElement
   const selectedProjectId = ref()
 
   if (target.value != 'null') {
     selectedProjectId.value = target.value
 
-    projectService.SetSelectProject(selectedProjectId.value)
+    await projectService.SetSelectProject(selectedProjectId.value)
   } else {
     selectedProjectId.value = null
-    projectService.SetSelectProject(selectedProjectId.value)
+    await projectService.SetSelectProject(selectedProjectId.value)
   }
 
-  router.push({ name: 'home' })
+  window.location.reload()
 }
 
 const goToProjects = () => {
@@ -194,7 +199,6 @@ const goToStories = () => {
   padding: 5px 10px;
   font-weight: bold;
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-  width: 10vw;
   height: 8vh;
 }
 </style>

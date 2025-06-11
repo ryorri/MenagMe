@@ -48,6 +48,16 @@ class UserService {
     }
   }
 
+  Logout(): boolean {
+    try {
+      localStorage.removeItem('loggedUser')
+      return true
+    } catch (ex) {
+      console.log(ex)
+      return false
+    }
+  }
+
   async GetUser(id: string): Promise<UserDataDTO | undefined> {
     try {
       const user = await Backend.getUser(id)

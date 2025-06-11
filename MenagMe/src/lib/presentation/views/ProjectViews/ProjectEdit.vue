@@ -1,18 +1,17 @@
 <template>
   <mainLayout>
-    <div v-if="!loading">Loading...</div>
-    <div v-else class="project-details">
+    <div v-if="loading" class="project-details">
       <form @submit.prevent="editProject" class="form-container">
         <div class="form-group">
           <label for="name">Name:</label>
-          <input id="name" v-model="editedProject.name" type="text" required class="form-input" />
+          <input id="name" v-model="editedProject!.name" type="text" required class="form-input" />
         </div>
 
         <div class="form-group">
           <label for="desc">Description:</label>
           <textarea
             id="desc"
-            v-model="editedProject.description"
+            v-model="editedProject!.description"
             required
             class="form-input"
           ></textarea>
@@ -21,6 +20,7 @@
         <button type="submit" class="submit-btn">Edit project</button>
       </form>
     </div>
+    <div v-else>Loading...</div>
   </mainLayout>
 </template>
 
@@ -38,12 +38,11 @@ const projectId = String(route.params.id)
 
 const projectService = new ProjectService()
 
-const editedProject = ref()
+const editedProject = ref<ProjectDataDTO>()
 const loading = ref(false)
 
 onMounted(() => {
   fetchProjectDetails()
-  loading.value = true
 })
 
 const editProject = () => {
@@ -61,6 +60,7 @@ const fetchProjectDetails = async () => {
       name: projectDetails.name,
       description: projectDetails.description,
     }
+    loading.value = true
   }
 }
 </script>

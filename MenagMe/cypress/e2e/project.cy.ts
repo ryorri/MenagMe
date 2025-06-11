@@ -1,0 +1,41 @@
+/// <reference types="cypress" />
+
+describe('Project', () => {
+  it('Create project', () => {
+    cy.visit('http://localhost:5173')
+    cy.get('button[type="submit"]').click()
+    cy.get('input[id="login"]').type('jadminowy')
+    cy.get('input[id="psw"]').type('JanAdminowy1!')
+    cy.get('button[type="submit"]').click()
+    cy.get(':nth-child(1) > .nav-link').click()
+    cy.get('.p-4 > .btn').click()
+    cy.get('#name').type('Test Project')
+    cy.get('#desc').type('This is a test project description.')
+    cy.get('.form-container > .btn').click()
+    cy.get('tbody > tr > :nth-child(1)').contains('Test Project')
+  })
+  it('Edit project', () => {
+    cy.visit('http://localhost:5173')
+    cy.get('button[type="submit"]').click()
+    cy.get('input[id="login"]').type('jadminowy')
+    cy.get('input[id="psw"]').type('JanAdminowy1!')
+    cy.get('button[type="submit"]').click()
+    cy.get(':nth-child(1) > .nav-link').click()
+    cy.get(':nth-child(4) > .btn').click()
+    cy.get('#name').clear().type('Updated Test Project')
+    cy.get('#desc').clear().type('This is an updated test project description.')
+    cy.get('.submit-btn').click()
+    cy.get('tbody > tr > :nth-child(1)').contains('Updated Test Project')
+  })
+
+  it('Delete project', () => {
+    cy.visit('http://localhost:5173')
+    cy.get('button[type="submit"]').click()
+    cy.get('input[id="login"]').type('jadminowy')
+    cy.get('input[id="psw"]').type('JanAdminowy1!')
+    cy.get('button[type="submit"]').click()
+    cy.get(':nth-child(1) > .nav-link').click()
+    cy.get(':nth-child(1) > :nth-child(5) > .btn').click()
+    cy.get('.delete-btn').click()
+  })
+})

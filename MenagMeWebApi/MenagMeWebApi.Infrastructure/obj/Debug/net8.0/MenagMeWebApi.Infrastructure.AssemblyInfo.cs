@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MenagMeWebApi.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35b5598b186d49f49b44d0af35bcedf68f003a37")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2a45a143defa81b0db60194c295fc62da1c88db")]
 [assembly: System.Reflection.AssemblyProductAttribute("MenagMeWebApi.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MenagMeWebApi.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

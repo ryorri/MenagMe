@@ -1,11 +1,27 @@
 {
   "files": [],
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "types": ["node", "cypress"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["cypress.config.ts", "cypress/e2e/**/*"],
   "references": [
     {
       "path": "./tsconfig.node.json"
     },
     {
       "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./cypress/tsconfig.e2e.json"
     }
   ]
 }
